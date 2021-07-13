@@ -1,0 +1,54 @@
+{
+  "name": "ucworks-client-desktop-common",
+  "version": "1.0.3",
+  "description": "?",
+  "files": [
+    "./hooks",
+    "./css",
+    "./theme"
+  ],
+  "scripts": {
+    "start": "webpack serve --open --env dev",
+    "build": "webpack --env prod ",
+    "test": "jest"
+  },
+  "author": "anax015obs",
+  "license": "ISC",
+  "devDependencies": {
+    "@emotion/react": "^11.4.0",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^11.2.7",
+    "@types/jest": "^26.0.23",
+    "@types/react": "^17.0.11",
+    "@types/react-dom": "^17.0.9",
+    "html-webpack-plugin": "^5.3.2",
+    "jest": "^27.0.5",
+    "jest-svg-transformer": "^1.0.0",
+    "prop-types": "^15.7.2",
+    "rc-tree": "^4.1.5",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-hook-form": "^7.9.0",
+    "react-useportal": "^1.0.14",
+    "ts-jest": "^27.0.3",
+    "ts-loader": "^9.2.3",
+    "typescript": "^4.3.2",
+    "url-loader": "^4.1.1",
+    "webpack": "^5.40.0",
+    "webpack-cli": "^4.7.2",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "peerDependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.svg$": "jest-svg-transformer"
+    }
+  },
+  "dependencies": {
+    "react-icons": "^4.2.0",
+    "webpack-merge": "^5.8.0"
+  }
+}
