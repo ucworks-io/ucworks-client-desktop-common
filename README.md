@@ -30,7 +30,7 @@ usages
 /** @jsxImportSource @emotion/react */
 import { css, ThemeProvider } from "@emotion/react";
 import ReactDOM from "react-dom";
-import { palettes } from "../theme";
+import { palettes } from "ucworks-client-desktop-common/theme";
 
 const baseTheme = {
   headerHeight: "100px",
