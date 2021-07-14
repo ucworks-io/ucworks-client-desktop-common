@@ -9,6 +9,7 @@ module.exports = {
     "./lib/hooks/index.ts",
     "./lib/css/index.ts",
     "./lib/theme/index.ts",
+    "./lib/components/index.ts",
   ],
   output: {
     filename: "script.js",

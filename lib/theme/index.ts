@@ -67,6 +67,8 @@ export const palettes = {
     _500: "#2094fa",
   },
   violet: {
+    _300: "#eae4f5",
+    _400: "#d5cce8",
     _500: "#787aff",
   },
   deepViolet: {

@@ -6,6 +6,7 @@ module.exports = {
     hooks: "./lib/hooks/index.ts",
     css: "./lib/css/index.ts",
     theme: "./lib/theme/index.ts",
+    components: "./lib/components/index.ts",
   },
   output: {
     filename: "[name]/index.js",

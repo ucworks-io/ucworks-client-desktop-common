@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css, ThemeProvider } from "@emotion/react";
 import ReactDOM from "react-dom";
+import { Button } from "../components";
 import { palettes } from "../theme";
 
 const baseTheme = {
@@ -12,13 +13,9 @@ export type BaseTheme = typeof baseTheme;
 
 const App = () => {
   return (
-    <button
-      css={(props) => css`
-        background-color: ${props.palettes.blue._500};
-      `}
-    >
-      click me!!
-    </button>
+    <Button colorTheme="deepViolet">
+      취소소소소소소소소소소소소소소소소소소소소소
+    </Button>
   );
 };
 
