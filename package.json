@@ -1,6 +1,6 @@
 {
   "name": "ucworks-client-desktop-common",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "?",
   "files": [
     "./hooks",
@@ -49,7 +49,9 @@
     }
   },
   "dependencies": {
+    "@hookform/resolvers": "^2.6.1",
     "react-icons": "^4.2.0",
-    "webpack-merge": "^5.8.0"
+    "webpack-merge": "^5.8.0",
+    "yup": "^0.32.9"
   }
 }
