@@ -1,6 +1,6 @@
 {
   "name": "ucworks-client-desktop-common",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "?",
   "files": [
     "./hooks",

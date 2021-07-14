@@ -21,7 +21,11 @@ const App = () => {
   return (
     <>
       <Tab />
-      {current === 0 ? <span>foo</span> : <span>bar</span>}
+      {current === 0 ? (
+        <Button colorTheme="primary">foo</Button>
+      ) : (
+        <span>bar</span>
+      )}
     </>
   );
 };

@@ -82,7 +82,7 @@ export default function Button({ colorTheme = "none", ...rest }: Props) {
         css`
           padding: 8px 12px;
           appearance: none;
-          border: 1px solid;
+          border: 1px solid !important;
           border-radius: 4px;
           font-size: 1rem;
           cursor: pointer;
