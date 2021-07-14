@@ -2,34 +2,39 @@
 
 this project contains palettes, components and custom hooks that is used by ucworks team.
 
-## Table of contents 
-* Installation
-* API 
+## Table of contents
 
-## Installation 
----
+* Installation
+* API
+
+## Installation
+
 Using npm
-```
+
+```bash
 npm install --save ucworks-client-desktop-common
 ```
 
-Using yarn 
-```
+Using yarn
+
+```bash
 yarn add ucworks-client-desktop-common
 ```
 
 ## API
----
 
 ### `useModal`
+
 return [Portal][https://github.com/alex-cory/react-useportal]
 
 #### PropsTypes 
+
 |Property|Type|Required?|Default|Description|
 |--------|----|---------|-------|-----------|
 |overlay|boolean|❌|true|Determine if overlay is visible|
 
 #### Usages
+
 ```javascript
 const App = () => {
   const { openModal, closeModal, isOpen, Modal } = useModal();
