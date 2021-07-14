@@ -1,4 +1,4 @@
-# Project is maintained (v1.0.3)
+# Project is maintained (v1.0.8)
 
 this project contains palettes, components and custom hooks that is used by ucworks desktop team.
 
