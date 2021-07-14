@@ -21,9 +21,21 @@ Using yarn
 yarn add ucworks-client-desktop-common
 ```
 
+## `components`
+
+### `<Button/>`
+
+return button component
+
+#### PropTypes
+
+|Property|Type|Required?|Default|Description|
+|--------|----|---------|-------|-----------|
+|colorTheme|string|❌|none|determine button's color|
+
 ## `palettes`
 
-usages
+#### usages
 
 ```typescript
 // index.tsx
@@ -69,7 +81,7 @@ declare module "@emotion/react" {
 
 ## `hooks`
 
-### `useTab`
+### `useTab()`
 
 return TabComponent and current tab index
 
@@ -99,7 +111,7 @@ const App = () => {
 };
 ```
 
-### `useModal`
+### `useModal()`
 
 return [Portal](https://github.com/alex-cory/react-useportal), toggle functions and boolean that represents if the modal is visible or not.
 
