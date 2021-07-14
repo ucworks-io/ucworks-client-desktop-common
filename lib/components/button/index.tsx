@@ -1,17 +1,16 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import { useTheme } from "@emotion/react";
-import React, { DetailedHTMLProps, useMemo } from "react";
+import React, { DetailedHTMLProps, useEffect, useMemo } from "react";
 
 type Props = {
-  colorTheme?: "none" | "violet" | "deepViolet";
+  colorTheme?: "none" | "violet" | "primary" | "secondary";
 } & React.DetailedHTMLProps<
   React.ButtonHTMLAttributes<HTMLButtonElement>,
   HTMLButtonElement
 >;
 
-export default function Button(props: Props = { colorTheme: "none" }) {
-  const { colorTheme, ...buttonProps } = props;
+export default function Button({ colorTheme = "none", ...rest }: Props) {
   const theme = useTheme();
 
   const themeCss = useMemo(() => {
@@ -20,11 +19,12 @@ export default function Button(props: Props = { colorTheme: "none" }) {
         return css`
           border-color: ${theme.palettes.grey._1100};
           background-color: white;
+          color: ${theme.palettes.grey._1100};
           &:hover {
-            background-color: ${theme.palettes.grey._1100};
+            background-color: ${theme.palettes.grey._100};
           }
           &:active {
-            background-color: ${theme.palettes.grey._1100};
+            background-color: ${theme.palettes.grey._200};
           }
         `;
       }
@@ -32,6 +32,7 @@ export default function Button(props: Props = { colorTheme: "none" }) {
         return css`
           border-color: ${theme.palettes.primary._500};
           background-color: white;
+          color: ${theme.palettes.primary._500};
           &:hover {
             background-color: ${theme.palettes.violet._300};
           }
@@ -40,7 +41,7 @@ export default function Button(props: Props = { colorTheme: "none" }) {
           }
         `;
       }
-      case "deepViolet": {
+      case "primary": {
         return css`
           border-color: ${theme.palettes.primary._500};
           background-color: ${theme.palettes.primary._500};
@@ -48,12 +49,25 @@ export default function Button(props: Props = { colorTheme: "none" }) {
           &:hover {
             border-color: ${theme.palettes.primary._400};
             background-color: ${theme.palettes.primary._400};
-            color: white;
           }
           &:active {
             border-color: ${theme.palettes.primary._600};
             background-color: ${theme.palettes.primary._600};
-            color: white;
+          }
+        `;
+      }
+      case "secondary": {
+        return css`
+          border-color: ${theme.palettes.secondary._500};
+          background-color: ${theme.palettes.secondary._500};
+          color: white;
+          &:hover {
+            border-color: ${theme.palettes.secondary._400};
+            background-color: ${theme.palettes.secondary._400};
+          }
+          &:active {
+            border-color: ${theme.palettes.secondary._600};
+            background-color: ${theme.palettes.secondary._600};
           }
         `;
       }
@@ -62,7 +76,7 @@ export default function Button(props: Props = { colorTheme: "none" }) {
 
   return (
     <button
-      {...buttonProps}
+      {...rest}
       css={[
         themeCss,
         css`

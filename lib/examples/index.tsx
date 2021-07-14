@@ -2,6 +2,8 @@
 import { css, ThemeProvider } from "@emotion/react";
 import ReactDOM from "react-dom";
 import { Button } from "../components";
+import { useModal } from "../hooks";
+import useTab from "../hooks/useTab";
 import { palettes } from "../theme";
 
 const baseTheme = {
@@ -12,10 +14,15 @@ const baseTheme = {
 export type BaseTheme = typeof baseTheme;
 
 const App = () => {
+  const [current, Tab] = useTab({
+    rows: ["foo", "bar"],
+    initialRow: 1,
+  });
   return (
-    <Button colorTheme="deepViolet">
-      취소소소소소소소소소소소소소소소소소소소소소
-    </Button>
+    <>
+      <Tab />
+      {current === 0 ? <span>foo</span> : <span>bar</span>}
+    </>
   );
 };
 

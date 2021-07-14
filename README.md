@@ -69,6 +69,36 @@ declare module "@emotion/react" {
 
 ## `hooks`
 
+### `useTab`
+
+return TabComponent and current tab index
+
+#### PropsTypes
+
+|Property|Type|Required?|Default|Description|
+|--------|----|---------|-------|-----------|
+|rows|string[]|✅||tab title that is displayed|
+|initialRow|number|❌|0|tab index that is displayed at first|
+
+#### Usages
+
+```typescript
+import { useTab } from "ucworks-client-desktop-common/hooks";
+
+const App = () => {
+  const [current, Tab] = useTab({
+    rows: ["foo", "bar"],
+    initialRow: 1,
+  });
+  return (
+    <>
+      <Tab />
+      {current === 0 ? <span>foo</span> : <span>bar</span>}
+    </>
+  );
+};
+```
+
 ### `useModal`
 
 return [Portal](https://github.com/alex-cory/react-useportal), toggle functions and boolean that represents if the modal is visible or not.
