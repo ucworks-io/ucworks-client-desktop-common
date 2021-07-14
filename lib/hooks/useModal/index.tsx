@@ -3,14 +3,23 @@ import { css } from "@emotion/react";
 import React, { useEffect } from "react";
 import usePortal from "react-useportal";
 
-export default function useModal() {
+interface Props {
+  overlay?: boolean;
+}
+
+export default function useModal(props: Props = { overlay: true }) {
   const { isOpen, openPortal, togglePortal, closePortal, Portal } = usePortal({
     onOpen({ portal }) {
-      const overlay = document.createElement("div");
-      overlay.id = "overlay";
-      overlay.style.cssText =
-        "position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:100;";
-      document.body.appendChild(overlay);
+      const overlayDiv = document.createElement("div");
+      overlayDiv.id = "overlay";
+      if (props?.overlay) {
+        overlayDiv.style.cssText =
+          "position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:100;background-color:#000000;opacity:0.9;";
+      } else {
+        overlayDiv.style.cssText =
+          "position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:100;";
+      }
+      document.body.appendChild(overlayDiv);
       portal.current.style.cssText = `
         /* add your css here for the Portal */
         position: absolute;
@@ -23,18 +32,18 @@ export default function useModal() {
       `;
     },
     onClose({ portal }) {
-      const overlay = document.getElementById("overlay");
-      if (overlay) {
-        overlay.remove();
+      const overlayDiv = document.getElementById("overlay");
+      if (overlayDiv) {
+        overlayDiv.remove();
       }
     },
   });
 
   useEffect(
     () => () => {
-      const overlay = document.getElementById("overlay");
-      if (overlay) {
-        overlay.remove();
+      const overlayDiv = document.getElementById("overlay");
+      if (overlayDiv) {
+        overlayDiv.remove();
       }
     },
     []

@@ -32,7 +32,7 @@ const ModalComponent = ({ unmount }: { unmount: () => void }) => {
 };
 
 const App = () => {
-  const { Modal, openModal, closeModal, isOpen } = useModal();
+  const { Modal, openModal, closeModal, isOpen } = useModal({ overlay: false });
   return (
     <>
       <button
