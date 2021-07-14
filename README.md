@@ -32,18 +32,24 @@ return [Portal][https://github.com/alex-cory/react-useportal]
 #### Usages
 ```javascript
 const App = () => {
-    const { openModal, closeModal, isOpen, Modal } = useModal();
-    
-    return (
-        <button type="button" onClick={(e) => {
-            openModal(e);
-        }}>
+  const { openModal, closeModal, isOpen, Modal } = useModal();
+
+  return (
+    <>
+      <button
+        type="button"
+        onClick={(e) => {
+          openModal(e);
+        }}
+      >
         clickme!
-        </button>
-        {isOpen && (<Modal>
-            <span>modal</span>
+      </button>
+      {isOpen && (
+        <Modal>
+          <span>modal</span>
         </Modal>
-        )}
-    );
-}
+      )}
+    </>
+  );
+};
 ```
