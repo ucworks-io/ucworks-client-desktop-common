@@ -25,9 +25,9 @@ yarn add ucworks-client-desktop-common
 
 ### `useModal`
 
-return [Portal][https://github.com/alex-cory/react-useportal]
+return [Portal](https://github.com/alex-cory/react-useportal), toggle functions and boolean that represents if the modal is visible or not.
 
-#### PropsTypes 
+#### PropsTypes
 
 |Property|Type|Required?|Default|Description|
 |--------|----|---------|-------|-----------|
