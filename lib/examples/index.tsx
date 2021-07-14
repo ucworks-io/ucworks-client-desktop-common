@@ -1,54 +1,30 @@
 /** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react";
-import { useEffect } from "react";
+import { css, ThemeProvider } from "@emotion/react";
 import ReactDOM from "react-dom";
-import { useModal } from "../hooks";
+import { palettes } from "../theme";
 
-const ModalComponent = ({ unmount }: { unmount: () => void }) => {
-  const { Modal, openModal, closeModal, isOpen } = useModal();
-  useEffect(
-    () => () => {
-      unmount();
-    },
-    []
-  );
-  return (
-    <div>
-      <span>this is modal 1</span>
-      <button
-        onClick={(e) => {
-          openModal(e);
-        }}
-      >
-        click me!!
-      </button>
-      {isOpen && (
-        <Modal>
-          <>this is modal2</>
-        </Modal>
-      )}
-    </div>
-  );
+const baseTheme = {
+  headerHeight: "100px",
+  palettes,
 };
+
+export type BaseTheme = typeof baseTheme;
 
 const App = () => {
-  const { Modal, openModal, closeModal, isOpen } = useModal({ overlay: false });
   return (
-    <>
-      <button
-        onClick={(e) => {
-          openModal(e);
-        }}
-      >
-        click me!!
-      </button>
-      {isOpen && (
-        <Modal>
-          <ModalComponent unmount={closeModal} />
-        </Modal>
-      )}
-    </>
+    <button
+      css={(props) => css`
+        background-color: ${props.palettes.blue._500};
+      `}
+    >
+      click me!!
+    </button>
   );
 };
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(
+  <ThemeProvider theme={baseTheme}>
+    <App />
+  </ThemeProvider>,
+  document.getElementById("root")
+);
