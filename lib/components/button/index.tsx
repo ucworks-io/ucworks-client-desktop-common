@@ -70,7 +70,7 @@ export default function Button(props: Props = { colorTheme: "none" }) {
           appearance: none;
           border: 1px solid;
           border-radius: 4px;
-          font-size: 0.8rem;
+          font-size: 1rem;
           cursor: pointer;
 
           &:disabled {
