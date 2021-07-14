@@ -1,6 +1,6 @@
 # Project is maintained (v1.0.3)
 
-this project contains palettes, components and custom hooks that is used by ucworks team.
+this project contains palettes, components and custom hooks that is used by ucworks desktop team.
 
 ## Table of contents
 
@@ -36,6 +36,8 @@ return [Portal](https://github.com/alex-cory/react-useportal), toggle functions 
 #### Usages
 
 ```javascript
+import { useModal } from "ucworks-client-desktop-common/hooks";
+
 const App = () => {
   const { openModal, closeModal, isOpen, Modal } = useModal();
 
