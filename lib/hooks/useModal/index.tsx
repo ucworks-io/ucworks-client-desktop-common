@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react";
+import { css, Interpolation, Theme } from "@emotion/react";
 import React, { useEffect } from "react";
 import usePortal from "react-useportal";
 
@@ -49,16 +49,25 @@ export default function useModal(props: Props = { overlay: true }) {
     []
   );
 
-  const Modal = ({ children }: { children: JSX.Element | JSX.Element[] }) => {
+  const Modal = ({
+    children,
+    override,
+  }: {
+    children: JSX.Element | JSX.Element[];
+    override?: Interpolation<Theme>;
+  }) => {
     return (
       <Portal>
         <div
-          css={css`
-            background-color: white;
-            padding: 20px;
-            box-shadow: 0 3px 12px 0 rgba(75, 85, 98, 0.3);
-            border-radius: 6px;
-          `}
+          css={[
+            css`
+              background-color: white;
+              padding: 20px;
+              box-shadow: 0 3px 12px 0 rgba(75, 85, 98, 0.3);
+              border-radius: 6px;
+            `,
+            override,
+          ]}
         >
           {children}
         </div>

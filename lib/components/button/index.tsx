@@ -1,16 +1,21 @@
 /** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react";
+import { css, Interpolation, Theme } from "@emotion/react";
 import { useTheme } from "@emotion/react";
 import React, { DetailedHTMLProps, useEffect, useMemo } from "react";
 
 type Props = {
   colorTheme?: "none" | "violet" | "primary" | "secondary";
+  override?: Interpolation<Theme>;
 } & React.DetailedHTMLProps<
   React.ButtonHTMLAttributes<HTMLButtonElement>,
   HTMLButtonElement
 >;
 
-export default function Button({ colorTheme = "none", ...rest }: Props) {
+export default function Button({
+  colorTheme = "none",
+  override,
+  ...rest
+}: Props) {
   const theme = useTheme();
 
   const themeCss = useMemo(() => {
@@ -86,6 +91,7 @@ export default function Button({ colorTheme = "none", ...rest }: Props) {
           border-radius: 4px;
           font-size: 1rem;
           cursor: pointer;
+          transition: ease-in-out background-color 0.25s;
 
           &:disabled {
             background-color: ${theme.palettes.grey._200};
@@ -93,7 +99,10 @@ export default function Button({ colorTheme = "none", ...rest }: Props) {
             color: ${theme.palettes.grey._600};
             cursor: not-allowed;
           }
+
+          outline: 0 !important;
         `,
+        override,
       ]}
     ></button>
   );

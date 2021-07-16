@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { css, useTheme } from "@emotion/react";
+import { css, Interpolation, Theme, useTheme } from "@emotion/react";
 import React, { useState } from "react";
 
 interface Props {
@@ -7,22 +7,29 @@ interface Props {
   rows: string[];
 }
 
+interface TabProps {
+  override?: Interpolation<Theme>;
+}
+
 export default function useTab({
   rows,
   initialRow = 0,
-}: Props): [number, () => JSX.Element] {
+}: Props): [number, (props: TabProps) => JSX.Element] {
   const [current, setCurrent] = useState<number>(initialRow);
   const theme = useTheme();
   const handleTabClick = (idx: number) => {
     setCurrent(idx);
   };
 
-  const Tab = () => {
+  const Tab = ({ override }: TabProps) => {
     return (
       <ul
-        css={css`
-          display: flex;
-        `}
+        css={[
+          css`
+            display: flex;
+          `,
+          override,
+        ]}
       >
         {rows.map((row, idx) => (
           <li
