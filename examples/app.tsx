@@ -4,20 +4,7 @@ import * as yup from "yup";
 import { css, ThemeProvider } from "@emotion/react";
 import ReactDOM from "react-dom";
 import { useForm } from "react-hook-form";
-import { Button, Checkbox } from "../components";
-import Form from "../components/form";
-import Input from "../components/input";
-import { useModal } from "../hooks";
-import useTab from "../hooks/useTab";
-import { palettes } from "../theme";
-import Table from "../components/table";
-
-const baseTheme = {
-  headerHeight: "100px",
-  palettes,
-};
-
-export type BaseTheme = typeof baseTheme;
+import { Button, Checkbox, Form, Input, useModal, useTab, UcThemeProvider, Table } from "../src";
 
 const App = () => {
   const methods = useForm({
@@ -62,8 +49,8 @@ const App = () => {
 };
 
 ReactDOM.render(
-  <ThemeProvider theme={baseTheme}>
+  <UcThemeProvider>
     <App />
-  </ThemeProvider>,
+    </UcThemeProvider>,
   document.getElementById("root")
 );

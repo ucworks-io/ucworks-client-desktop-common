@@ -1,5 +1,5 @@
-import { BaseTheme } from "../lib/examples";
+import { UcTheme } from "../src";
 
 declare module "@emotion/react" {
-  interface Theme extends BaseTheme {}
+  interface Theme extends UcTheme {}
 }

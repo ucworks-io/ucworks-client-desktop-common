@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import { css, Interpolation, Theme, useTheme } from "@emotion/react";
 import { UseFormReturn } from "react-hook-form";
-import CheckedSVG from "../../icons/icon-checkbox-checked.svg";
-import UnCheckedSVG from "../../icons/icon-checkbox-unchecked.svg";
+import CheckedSVG from "../icons/icon-checkbox-checked.svg";
+import UnCheckedSVG from "../icons/icon-checkbox-unchecked.svg";
 
 type Props = {
   name: string;

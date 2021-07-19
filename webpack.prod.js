@@ -1,15 +1,14 @@
 const path = require("path");
+const glob = require('glob');
 
 module.exports = {
   mode: "production",
-  entry: {
-    hooks: "./lib/hooks/index.ts",
-    css: "./lib/css/index.ts",
-    theme: "./lib/theme/index.ts",
-    components: "./lib/components/index.ts",
-  },
+  entry: glob.sync('./src/*').reduce(function(obj, el){
+    obj[path.parse(el).name] = el;
+    return obj
+ },{}),
   output: {
-    filename: "[name]/index.js",
+    filename: "./lib/[name].js",
     path: path.resolve(__dirname),
     libraryTarget: "umd",
     library: "ucworks",
@@ -20,7 +19,7 @@ module.exports = {
       // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
       {
         test: /\.tsx?$/,
-        exclude: "/node_modules/",
+        exclude: /node_modules/,
         loader: "ts-loader",
       },
       {

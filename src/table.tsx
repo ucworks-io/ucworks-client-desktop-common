@@ -12,9 +12,9 @@ import {
   TableState,
   useBlockLayout,
 } from "react-table";
-import CheckedSVG from "../../icons/icon-checkbox-checked.svg";
-import UnCheckedBoldSVG from "../../icons/icon-checkbox-unchecked-bold.svg";
-import UnCheckedSVG from "../../icons/icon-checkbox-unchecked.svg";
+import CheckedSVG from "../icons/icon-checkbox-checked.svg";
+import UnCheckedBoldSVG from "../icons/icon-checkbox-unchecked-bold.svg";
+import UnCheckedSVG from "../icons/icon-checkbox-unchecked.svg";
 
 const CheckboxComponent = forwardRef(
   (

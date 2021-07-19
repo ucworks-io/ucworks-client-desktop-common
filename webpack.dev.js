@@ -5,11 +5,8 @@ module.exports = {
   mode: "development",
   devtool: "inline-source-map",
   entry: [
-    "./lib/examples/index.tsx",
-    "./lib/hooks/index.ts",
-    "./lib/css/index.ts",
-    "./lib/theme/index.ts",
-    "./lib/components/index.ts",
+    "./examples/app.tsx",
+    "./src/index.ts"
   ],
   output: {
     filename: "script.js",
