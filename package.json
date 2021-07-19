@@ -1,13 +1,8 @@
 {
   "name": "ucworks-client-desktop-common",
-  "version": "1.0.19",
+  "version": "1.0.20",
   "description": "?",
-  "files": [
-    "./hooks",
-    "./css",
-    "./theme",
-    "./components"
-  ],
+  "file": "./lib",
   "scripts": {
     "start": "webpack serve --open --env dev",
     "build": "webpack --env prod ",
