@@ -1,6 +1,6 @@
 {
   "name": "ucworks-client-desktop-common",
-  "version": "1.0.22",
+  "version": "1.0.23",
   "description": "?",
   "file": "./lib/index.ts",
   "types": "./lib/index.d.ts",
