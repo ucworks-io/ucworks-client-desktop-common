@@ -73,6 +73,7 @@ declare module "@emotion/react" {
 
 #### usages
 ```typescript
+import { Checkbox, Button } from "ucworks-client-desktop-common";
 
 const App = () => {
   const {handleSubmit, register} = useForm();
@@ -97,6 +98,7 @@ const App = () => {
 
 #### usages
 ```typescript
+import { Input, Button } from "ucworks-client-desktop-common";
 
 const App = () => {
   const {handleSubmit, register, formState} = useForm({
@@ -130,6 +132,8 @@ const App = () => {
 
 #### usages 
 ```typescript
+import { Table } from "ucworks-client-desktop-common";
+
 const App = () => {
   const columns = [
     {
@@ -174,7 +178,7 @@ return TabComponent and current tab index
 #### Usages
 
 ```typescript
-import { useTab } from "ucworks-client-desktop-common/hooks";
+import { useTab } from "ucworks-client-desktop-common";
 
 const App = () => {
   const [current, Tab] = useTab({
@@ -203,7 +207,7 @@ return [Portal](https://github.com/alex-cory/react-useportal), toggle functions 
 #### Usages
 
 ```typescript
-import { useModal } from "ucworks-client-desktop-common/hooks";
+import { useModal } from "ucworks-client-desktop-common";
 
 const App = () => {
   const { openModal, closeModal, isOpen, Modal } = useModal();
