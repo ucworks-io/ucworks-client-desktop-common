@@ -1,4 +1,4 @@
-# Project is maintained (v1.0.27)
+# Project is maintained (v1.0.28)
 
 this project contains components and custom hooks that is used by ucworks desktop team.
 
@@ -65,30 +65,54 @@ declare module "@emotion/react" {
 
 #### PropTypes
 
-| Property | Type          | Required? | Default | Description              |
-| -------- | ------------- | --------- | ------- | ------------------------ |
-| name     | string        | ✅         |         | key of FormData          |
-| label    | string        | ✅         |         | description for checkbox |
-| override | Interpolation | ❌         |         | override default css     |
-  
-### `<Form/>`
+| Property | Type                             | Required? | Default | Description              |
+| -------- | -------------------------------- | --------- | ------- | ------------------------ |
+|          | Partial`<UseFormRegisterReturn`> | ❌         |         | return value of register |
+| label    | string                           | ✅         |         | description for checkbox |
+| override | Interpolation                    | ❌         |         | override default css     |
 
-#### PropTypes
+#### usages
+```typescript
 
-| Property | Type                     | Required? | Default | Description               |
-| -------- | ------------------------ | --------- | ------- | ------------------------- |
-| onSubmit | (data: FormData) => void | ✅         |         | called after form submit. |
-| override | Interpolation            | ❌         |         | override default css      |
+const App = () => {
+  const {handleSubmit, register} = useForm();
+  return (
+    <form onSubmit={handleSubmit((data) => {console.log(data)})}>
+      <Checkbox label="checkbox" {...register("checkbox")}/>
+      <Button type="submit">submit</Button>
+    </form>);
+}
+```
 
 ### `<Input/>`
 
 #### PropTypes
 
-| Property | Type                             | Required? | Default | Description          |
-| -------- | -------------------------------- | --------- | ------- | -------------------- |
-| type     | "number" \| "text" \| "password" | ✅         |         | input types          |
-| name     | string                           | ✅         |         | key of FormData      |
-| override | Interpolation                    | ❌         |         | override default css |
+| Property | Type                             | Required? | Default | Description              |
+| -------- | -------------------------------- | --------- | ------- | ------------------------ |
+| type     | "number" \| "text" \| "password" | ✅         |         | input types              |
+|          | Partial`<UseFormRegisterReturn`> | ❌         |         | return value of register |
+| errors   | FieldErrors                      | ❌         |         | key of FormState         |
+| override | Interpolation                    | ❌         |         | override default css     |
+
+#### usages
+```typescript
+
+const App = () => {
+  const {handleSubmit, register, formState} = useForm({
+    resolver: yupResolver(
+      yup.object({
+        input: yup.string().required("fill the input!"),
+      })
+    ),
+  });
+  return (
+    <form onSubmit={handleSubmit((data) => {console.log(data)})}>
+      <Input type="text" {...register("input")} errors={formState.errors}/>
+      <Button type="submit">submit</Button>
+    </form>);
+}
+```
 
 ### `<Table/>`
 
@@ -103,6 +127,36 @@ declare module "@emotion/react" {
 | onSelect     | (selectedRow: Row) => void  | ❌         |         | called after rows are selected                                       |
 | searchValue  | string                      | ❌         |         | filter rows by given value.                                          |
 | override     | Interpolation               | ❌         |         | override default css                                                 |
+
+#### usages 
+```typescript
+const App = () => {
+  const columns = [
+    {
+      Header: "foo",
+      accessor: "foo",
+      minWidth: 100,
+    },
+    { Header: "bar", accessor: "bar", minWidth: 100 },
+  ];
+
+  const data = [
+    { foo: "foo1", bar: "bar1" },
+    { foo: "foo2", bar: "bar2" },
+  ];
+
+  return (
+    <Table
+      selectable
+      columns={columns}
+      data={data}
+      onSelect={(row) => {
+        console.log(row);
+      }}
+    />
+  )
+}
+```
 
 ## `hooks`
 

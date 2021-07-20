@@ -1,15 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import { css, Interpolation, Theme, useTheme } from "@emotion/react";
-import { UseFormReturn } from "react-hook-form";
+import { UseFormRegisterReturn, UseFormReturn } from "react-hook-form";
 import CheckedSVG from "../icons/icon-checkbox-checked.svg";
 import UnCheckedSVG from "../icons/icon-checkbox-unchecked.svg";
 
 type Props = {
-  name: string;
   label: string;
-  register?: UseFormReturn["register"];
-  errors?: UseFormReturn["formState"]["errors"];
-  watch?: UseFormReturn["watch"];
   override?: Interpolation<Theme>;
 } & Omit<
   React.DetailedHTMLProps<
@@ -17,20 +13,13 @@ type Props = {
     HTMLInputElement
   >,
   "type"
->;
+> & Partial<UseFormRegisterReturn>;
 
 export default function Checkbox({
-  name,
   label,
-  register,
-  errors,
-  watch,
   override,
   ...rest
 }: Props) {
-  if (!register) {
-    throw Error("useFormMethods is required");
-  }
   const theme = useTheme();
   return (
     <main
@@ -44,7 +33,6 @@ export default function Checkbox({
     >
       <input
         type="checkbox"
-        {...register(name)}
         {...rest}
         css={css`
           width: 14px;
@@ -60,7 +48,6 @@ export default function Checkbox({
         `}
       />
       <label
-        htmlFor={name}
         css={css`
           font-size: 1.14rem;
           margin-left: 8px;

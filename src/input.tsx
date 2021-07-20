@@ -1,32 +1,23 @@
 /** @jsxImportSource @emotion/react */
 import { css, Interpolation, Theme, useTheme } from "@emotion/react";
-import { UseFormReturn } from "react-hook-form";
+import { UseFormRegisterReturn, UseFormReturn } from "react-hook-form";
 import cx from "classnames";
 
 type Props = {
   type: "text" | "password" | "number";
-  name: string;
-  register?: UseFormReturn["register"];
-  errors?: UseFormReturn["formState"]["errors"];
-  watch?: UseFormReturn["watch"];
   override?: Interpolation<Theme>;
+  errors?: UseFormReturn["formState"]["errors"];
 } & React.DetailedHTMLProps<
   React.InputHTMLAttributes<HTMLInputElement>,
   HTMLInputElement
->;
+> & Partial<UseFormRegisterReturn>;
 
 export default function Input({
   type,
-  name,
-  register,
-  errors,
-  watch,
   override,
+  errors,
   ...rest
 }: Props) {
-  if (!register || !errors || !watch) {
-    throw Error("useFormMethods is required");
-  }
 
   const theme = useTheme();
 
@@ -34,7 +25,6 @@ export default function Input({
     <>
       <input
         type={type}
-        {...register(name)}
         {...rest}
         css={[
           css`
@@ -71,7 +61,7 @@ export default function Input({
           override,
         ]}
       />
-      {errors[name] && (
+      {errors && rest.name && errors[rest.name] && (
         <label
           css={css`
             display: block;
@@ -80,7 +70,7 @@ export default function Input({
             margin-top: 8px;
           `}
         >
-          {errors[name].message}
+          {errors[rest.name].message}
         </label>
       )}
     </>

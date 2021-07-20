@@ -4,13 +4,13 @@ import * as yup from "yup";
 import { css, ThemeProvider } from "@emotion/react";
 import ReactDOM from "react-dom";
 import { useForm } from "react-hook-form";
-import { Button, Checkbox, Form, Input, useModal, useTab, UcThemeProvider, Table } from "../src";
+import { Button, Checkbox, Input, useModal, useTab, UcThemeProvider, Table } from "../src";
 
 const App = () => {
-  const methods = useForm({
+  const {handleSubmit, register, formState} = useForm({
     resolver: yupResolver(
       yup.object({
-        foo: yup.string().required("fuck you hahaha"),
+        input: yup.string().required("fuck you hahaha"),
       })
     ),
   });
@@ -44,6 +44,11 @@ const App = () => {
           console.log(row);
         }}
       />
+      <form onSubmit={handleSubmit((data) => {console.log(data)})}>
+        <Input type="text" {...register("input")} errors={formState.errors}/>
+        <Checkbox label="foo" {...register("checkbox")}/>
+        <Button type="submit">submit</Button>
+      </form>
     </>
   );
 };
