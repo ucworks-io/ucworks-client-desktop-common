@@ -3,7 +3,7 @@ import React from 'react';
 
 export type UcTheme = typeof theme;
 
-const theme = {
+export const theme = {
     palettes: {
     primary: {
       _400: "#604790",

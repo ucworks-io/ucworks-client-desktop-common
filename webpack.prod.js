@@ -1,5 +1,6 @@
 const path = require("path");
 const glob = require('glob');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   mode: "production",
@@ -25,7 +26,7 @@ module.exports = {
       {
         test: /\.svg$/,
         loader: "url-loader",
-      },
+      }
     ],
   },
   resolve: {
@@ -48,4 +49,5 @@ module.exports = {
       "@emotion/react": "@emotion/react",
     },
   ],
+  plugins: [new CopyWebpackPlugin({patterns: [{from: './index.css', to: './lib/index.css'}]})]
 };

@@ -5,15 +5,7 @@
     "jsx": "react",
     "declaration": true,
     "outDir": "./lib",
-    "rootDirs": [
-      "./src",
-      "./examples"
-    ],
     "strict": true,
-    "typeRoots": [
-      "node_modules/@types",
-      "@types"
-    ],
     "esModuleInterop": true,
     "types": [
       "@emotion/react/types/css-prop",
@@ -21,5 +13,10 @@
     ],
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
-  }
+  },
+  "include": [
+    "./src/**/*",
+    "./@types",
+    "./node_modules/@types"
+  ]
 }
