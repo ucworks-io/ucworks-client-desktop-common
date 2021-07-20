@@ -1,8 +1,8 @@
 {
   "name": "ucworks-client-desktop-common",
-  "version": "1.0.23",
+  "version": "1.0.24",
   "description": "?",
-  "file": "./lib/index.ts",
+  "file": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "scripts": {
     "start": "webpack serve --open --env dev",
