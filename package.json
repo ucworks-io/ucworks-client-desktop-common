@@ -1,6 +1,6 @@
 {
   "name": "ucworks-client-desktop-common",
-  "version": "1.0.25",
+  "version": "1.0.26",
   "description": "?",
   "files": [
     "./lib"
@@ -22,6 +22,7 @@
     "@types/react": "^17.0.11",
     "@types/react-dom": "^17.0.9",
     "@types/react-table": "^7.7.2",
+    "css-loader": "^6.2.0",
     "html-webpack-plugin": "^5.3.2",
     "jest": "^27.0.5",
     "jest-svg-transformer": "^1.0.0",
@@ -32,6 +33,7 @@
     "react-hook-form": "^7.9.0",
     "react-table": "^7.7.0",
     "react-useportal": "^1.0.14",
+    "style-loader": "^3.1.0",
     "ts-jest": "^27.0.3",
     "ts-loader": "^9.2.3",
     "typescript": "^4.3.2",
@@ -49,5 +51,8 @@
     "transform": {
       "^.+\\.svg$": "jest-svg-transformer"
     }
+  },
+  "dependencies": {
+    "copy-webpack-plugin": "^9.0.1"
   }
 }
