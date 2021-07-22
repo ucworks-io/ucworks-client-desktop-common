@@ -4,10 +4,7 @@ const path = require("path");
 module.exports = {
   mode: "development",
   devtool: "inline-source-map",
-  entry: [
-    "./examples/app.tsx",
-    "./src/index.ts"
-  ],
+  entry: ["./examples/app.tsx", "./src/index.ts"],
   output: {
     filename: "script.js",
     path: path.resolve(__dirname, "dist"),
@@ -25,13 +22,36 @@ module.exports = {
         loader: "ts-loader",
       },
       {
+        test: /\.jsx?$/,
+        exclude: "/node_modules/",
+        loader: "babel-loader",
+      },
+      {
         test: /\.svg$/,
-        loader: "url-loader",
+        use: [
+          {
+            loader: "@svgr/webpack",
+            options: {
+              svgoConfig: {
+                plugins: [
+                  {
+                    cleanUpIDs: false,
+                  },
+                ],
+              },
+            },
+          },
+          "url-loader",
+        ],
+      },
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"],
       },
     ],
   },
   resolve: {
-    extensions: [".ts", ".tsx", ".js"],
+    extensions: [".ts", ".tsx", ".js", ".jsx"],
   },
   plugins: [
     new HtmlWebpackPlugin({

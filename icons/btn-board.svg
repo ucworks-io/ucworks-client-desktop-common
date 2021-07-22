@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50">
+    <defs>
+        <style>
+            .cls-2,.cls-3{fill:none;stroke:#666;stroke-width:2px}.cls-2{stroke-miterlimit:10}.cls-3{stroke-linecap:round}
+        </style>
+    </defs>
+    <g id="btn_board" transform="translate(-768 -766)">
+        <circle id="타원_399" cx="25" cy="25" r="25" fill="#f1f3f6" transform="translate(768 766)"/>
+        <g id="그룹_1913" transform="translate(510.346 710)">
+            <rect id="사각형_672" width="26" height="18" class="cls-2" rx="1.5" transform="translate(269.655 69)" stroke="#666"/>
+            <rect id="사각형_673" width="8" height="8" class="cls-2" rx="1" transform="translate(272.655 72)" stroke="#666"/>
+            <path id="패스_660" d="M296.1 72.268h1.73a.563.563 0 0 1 .607.505v8.989a.563.563 0 0 1-.607.506h-6.786a.563.563 0 0 1-.607-.506v-8.989a.563.563 0 0 1 .607-.505z" class="cls-2" transform="translate(-5.787 -0.268)" stroke="#666"/>
+            <g id="그룹_815" transform="translate(269.654 87)">
+                <path id="선_63" d="M0 0L0 6" class="cls-3" transform="translate(3.004)" stroke="#666"/>
+                <path id="선_64" d="M0 0L0 6" class="cls-3" transform="translate(22.001)" stroke="#666"/>
+                <path id="선_65" d="M0 0L26 0" class="cls-3" transform="translate(0 6)" stroke="#666"/>
+            </g>
+        </g>
+    </g>
+</svg>

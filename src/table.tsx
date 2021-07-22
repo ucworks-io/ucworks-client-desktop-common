@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { css, Interpolation, Theme, useTheme } from "@emotion/react";
+import { css, Interpolation, Theme } from "@emotion/react";
 import React, { ForwardedRef, forwardRef, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import {
@@ -15,6 +15,7 @@ import {
 import CheckedSVG from "../icons/icon-checkbox-checked.svg";
 import UnCheckedBoldSVG from "../icons/icon-checkbox-unchecked-bold.svg";
 import UnCheckedSVG from "../icons/icon-checkbox-unchecked.svg";
+import {theme} from './uc-theme-provider';
 
 const CheckboxComponent = forwardRef(
   (
@@ -124,8 +125,6 @@ export default function Table({
   useEffect(() => {
     setGlobalFilter(searchValue);
   }, [searchValue]);
-
-  const theme = useTheme();
 
   return (
     <table

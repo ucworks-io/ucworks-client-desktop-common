@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50">
+    <defs>
+        <style>
+            .cls-2{fill:#f1f3f6;stroke:#666;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px}
+        </style>
+    </defs>
+    <g id="btn_weekly_report" transform="translate(-850 -857)">
+        <circle id="타원_403" cx="25" cy="25" r="25" fill="#f1f3f6" transform="translate(850 857)"/>
+        <g id="그룹_1900" transform="translate(384 610)">
+            <path id="패스_624" d="M7901.065 10057.1l13 7 13-7-13-7z" class="cls-2" transform="translate(-7423.065 -9780.104)"/>
+            <path id="패스_629" d="M7901.065 10057.1l13 7 13-7-13-7z" class="cls-2" transform="translate(-7423.065 -9785.104)"/>
+            <path id="패스_630" d="M7901.065 10057.1l13 7 13-7-13-7z" class="cls-2" transform="translate(-7423.065 -9790.104)"/>
+        </g>
+    </g>
+</svg>

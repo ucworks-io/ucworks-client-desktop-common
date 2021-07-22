@@ -1,7 +1,8 @@
 /** @jsxImportSource @emotion/react */
-import { css, Interpolation, Theme, useTheme } from "@emotion/react";
+import { css, Interpolation, Theme } from "@emotion/react";
 import { UseFormRegisterReturn, UseFormReturn } from "react-hook-form";
 import cx from "classnames";
+import {theme} from './uc-theme-provider';
 
 type Props = {
   type: "text" | "password" | "number";
@@ -18,9 +19,6 @@ export default function Input({
   errors,
   ...rest
 }: Props) {
-
-  const theme = useTheme();
-
   return (
     <>
       <input

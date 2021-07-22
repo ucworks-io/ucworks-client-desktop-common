@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css, Interpolation, Theme } from "@emotion/react";
-import { useTheme } from "@emotion/react";
 import React, { DetailedHTMLProps, useEffect, useMemo } from "react";
+import {theme} from './uc-theme-provider';
 
 type Props = {
   colorTheme?: "none" | "violet" | "primary" | "secondary";
@@ -16,7 +16,7 @@ export default function Button({
   override,
   ...rest
 }: Props) {
-  const theme = useTheme();
+  
 
   const themeCss = useMemo(() => {
     switch (colorTheme) {

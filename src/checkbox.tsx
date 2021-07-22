@@ -1,8 +1,9 @@
 /** @jsxImportSource @emotion/react */
-import { css, Interpolation, Theme, useTheme } from "@emotion/react";
+import { css, Interpolation, Theme } from "@emotion/react";
 import { UseFormRegisterReturn, UseFormReturn } from "react-hook-form";
 import CheckedSVG from "../icons/icon-checkbox-checked.svg";
 import UnCheckedSVG from "../icons/icon-checkbox-unchecked.svg";
+import {theme} from './uc-theme-provider';
 
 type Props = {
   label: string;
@@ -20,7 +21,7 @@ export default function Checkbox({
   override,
   ...rest
 }: Props) {
-  const theme = useTheme();
+  
   return (
     <main
       css={[

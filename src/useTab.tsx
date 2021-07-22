@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
-import { css, Interpolation, Theme, useTheme } from "@emotion/react";
+import { css, Interpolation, Theme } from "@emotion/react";
 import React, { useState } from "react";
+import {theme} from './uc-theme-provider';
 
 interface Props {
   initialRow?: number;
@@ -16,7 +17,7 @@ export default function useTab({
   initialRow = 0,
 }: Props): [number, (props: TabProps) => JSX.Element] {
   const [current, setCurrent] = useState<number>(initialRow);
-  const theme = useTheme();
+  
   const handleTabClick = (idx: number) => {
     setCurrent(idx);
   };

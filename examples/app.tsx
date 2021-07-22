@@ -4,7 +4,8 @@ import * as yup from "yup";
 import { css, ThemeProvider } from "@emotion/react";
 import ReactDOM from "react-dom";
 import { useForm } from "react-hook-form";
-import { Button, Checkbox, Input, useModal, useTab, UcThemeProvider, Table } from "../src";
+import { Button, Checkbox, Input, useModal, useTab, UcThemeProvider, Table, Layout } from "../src";
+import "../index.css"
 
 const App = () => {
   const {handleSubmit, register, formState} = useForm({
@@ -34,7 +35,7 @@ const App = () => {
     { foo: "foo2", bar: "bar2" },
   ];
   return (
-    <>
+    <Layout>
       <Button colorTheme="primary">foo</Button>
       <Table
         selectable
@@ -49,7 +50,7 @@ const App = () => {
         <Checkbox label="foo" {...register("checkbox")}/>
         <Button type="submit">submit</Button>
       </form>
-    </>
+    </Layout>
   );
 };
 

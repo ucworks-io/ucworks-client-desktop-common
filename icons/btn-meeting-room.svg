@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50">
+    <defs>
+        <style>
+            .cls-2{fill:#f1f3f6;stroke:#707070;stroke-width:2px}.cls-3{stroke:none}.cls-4{fill:none}
+        </style>
+    </defs>
+    <g id="btn_meeting_room" transform="translate(-932 -766)">
+        <circle id="타원_398" cx="25" cy="25" r="25" fill="#f1f3f6" transform="translate(932 766)"/>
+        <g id="그룹_1902" transform="translate(615 273.667)">
+            <g id="사각형_667" class="cls-2">
+                <path d="M0 0H28V18H0z" class="cls-3" transform="translate(328 508.332)"/>
+                <path d="M1 1H27V17H1z" class="cls-4" transform="translate(328 508.332)"/>
+            </g>
+            <g id="그룹_1203" transform="translate(334 520.333)">
+                <path id="패스_655" d="M1571 809h-4c-3.313 0-6-2.267-6-5.063v-2.531a1.554 1.554 0 0 1 1.667-1.406 1.624 1.624 0 0 1 1.667 1.406 12.427 12.427 0 0 0 .32 1.35 1.781 1.781 0 0 0 1.769 1.181h5.155a1.781 1.781 0 0 0 1.769-1.181 12.364 12.364 0 0 0 .32-1.35 1.625 1.625 0 0 1 1.667-1.406 1.554 1.554 0 0 1 1.667 1.406v2.531C1577 806.733 1574.313 809 1571 809z" class="cls-2" transform="translate(-1561 -800)"/>
+                <g id="타원_262" class="cls-2" transform="translate(4 6)">
+                    <circle cx="4" cy="4" r="4" class="cls-3"/>
+                    <circle cx="4" cy="4" r="3" class="cls-4"/>
+                </g>
+            </g>
+            <g id="그룹_798" transform="translate(334.833 501.333)">
+                <path id="패스_655-2" d="M1571 800h-4c-3.313 0-6 2.267-6 5.063v2.531a1.554 1.554 0 0 0 1.667 1.406 1.624 1.624 0 0 0 1.667-1.406 12.427 12.427 0 0 1 .32-1.35 1.781 1.781 0 0 1 1.769-1.181h5.155a1.781 1.781 0 0 1 1.769 1.181 12.364 12.364 0 0 1 .32 1.35 1.625 1.625 0 0 0 1.667 1.406 1.554 1.554 0 0 0 1.667-1.406v-2.531C1577 802.267 1574.313 800 1571 800z" class="cls-2" transform="translate(-1561.833 -796)"/>
+                <g id="타원_262-2" class="cls-2" transform="translate(3.167 -1)">
+                    <circle cx="4" cy="4" r="4" class="cls-3"/>
+                    <circle cx="4" cy="4" r="3" class="cls-4"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

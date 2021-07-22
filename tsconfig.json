@@ -1,12 +1,13 @@
 {
   "compilerOptions": {
+    "module": "esnext",
     "target": "es2015",
-    "module": "commonjs",
-    "jsx": "react",
+    "jsx": "react-jsx",
+    "strict": true,
     "declaration": true,
     "outDir": "./lib",
-    "strict": true,
     "esModuleInterop": true,
+    "moduleResolution": "node",
     "types": [
       "@emotion/react/types/css-prop",
       "@types/jest"

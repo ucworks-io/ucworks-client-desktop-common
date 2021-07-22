@@ -1,13 +1,13 @@
 const path = require("path");
-const glob = require('glob');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const glob = require("glob");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   mode: "production",
-  entry: glob.sync('./src/*').reduce(function(obj, el){
+  entry: glob.sync("./src/*").reduce(function (obj, el) {
     obj[path.parse(el).name] = el;
-    return obj
- },{}),
+    return obj;
+  }, {}),
   output: {
     filename: "./lib/[name].js",
     path: path.resolve(__dirname),
@@ -25,8 +25,8 @@ module.exports = {
       },
       {
         test: /\.svg$/,
-        loader: "url-loader",
-      }
+        use: ["@svgr/webpack", "url-loader"],
+      },
     ],
   },
   resolve: {
@@ -49,5 +49,9 @@ module.exports = {
       "@emotion/react": "@emotion/react",
     },
   ],
-  plugins: [new CopyWebpackPlugin({patterns: [{from: './index.css', to: './lib/index.css'}]})]
+  plugins: [
+    new CopyWebpackPlugin({
+      patterns: [{ from: "./index.css", to: "./lib/index.css" }],
+    }),
+  ],
 };
