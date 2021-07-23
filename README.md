@@ -43,7 +43,7 @@ render(
 
 // theme.d.ts
 // for intellisense 
-import { UcTheme } from "../src";
+import { UcTheme } from "ucworks-client-desktop-common";
 
 declare module "@emotion/react" {
   interface Theme extends UcTheme {}

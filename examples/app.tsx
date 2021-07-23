@@ -4,11 +4,19 @@ import * as yup from "yup";
 import { css, ThemeProvider } from "@emotion/react";
 import ReactDOM from "react-dom";
 import { useForm } from "react-hook-form";
-import { Button, Checkbox, Input, useModal, useTab, UcThemeProvider, Table, Layout } from "../src";
-import "../index.css"
+import {
+  Button,
+  Checkbox,
+  Input,
+  useModal,
+  useTab,
+  UcThemeProvider,
+  Table,
+} from "../src";
+import "../index.css";
 
 const App = () => {
-  const {handleSubmit, register, formState} = useForm({
+  const { handleSubmit, register, formState } = useForm({
     resolver: yupResolver(
       yup.object({
         input: yup.string().required("fuck you hahaha"),
@@ -35,7 +43,7 @@ const App = () => {
     { foo: "foo2", bar: "bar2" },
   ];
   return (
-    <Layout>
+    <>
       <Button colorTheme="primary">foo</Button>
       <Table
         selectable
@@ -45,18 +53,22 @@ const App = () => {
           console.log(row);
         }}
       />
-      <form onSubmit={handleSubmit((data) => {console.log(data)})}>
-        <Input type="text" {...register("input")} errors={formState.errors}/>
-        <Checkbox label="foo" {...register("checkbox")}/>
+      <form
+        onSubmit={handleSubmit((data) => {
+          console.log(data);
+        })}
+      >
+        <Input type="text" {...register("input")} errors={formState.errors} />
+        <Checkbox label="foo" {...register("checkbox")} />
         <Button type="submit">submit</Button>
       </form>
-    </Layout>
+    </>
   );
 };
 
 ReactDOM.render(
   <UcThemeProvider>
     <App />
-    </UcThemeProvider>,
+  </UcThemeProvider>,
   document.getElementById("root")
 );
