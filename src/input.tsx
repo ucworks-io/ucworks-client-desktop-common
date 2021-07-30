@@ -1,8 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css, Interpolation, Theme } from "@emotion/react";
 import { UseFormRegisterReturn, UseFormReturn } from "react-hook-form";
-import cx from "classnames";
-import {theme} from './uc-theme-provider';
+import { theme } from "./uc-theme-provider";
 
 type Props = {
   type: "text" | "password" | "number";
@@ -11,14 +10,10 @@ type Props = {
 } & React.DetailedHTMLProps<
   React.InputHTMLAttributes<HTMLInputElement>,
   HTMLInputElement
-> & Partial<UseFormRegisterReturn>;
+> &
+  Partial<UseFormRegisterReturn>;
 
-export default function Input({
-  type,
-  override,
-  errors,
-  ...rest
-}: Props) {
+export default function Input({ type, override, errors, ...rest }: Props) {
   return (
     <>
       <input
