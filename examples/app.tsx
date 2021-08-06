@@ -12,56 +12,17 @@ import {
   useTab,
   UcThemeProvider,
   Table,
+  useSelect,
 } from "../src";
 import "../index.css";
 
 const App = () => {
-  const { handleSubmit, register, formState } = useForm({
-    resolver: yupResolver(
-      yup.object({
-        input: yup.string().required("fuck you hahaha"),
-      })
-    ),
-  });
-  const { Modal, isOpen, closeModal, openModal } = useModal();
-  const [current, Tab] = useTab({
-    rows: ["foo", "bar"],
-    initialRow: 1,
-  });
-
-  const columns = [
-    {
-      Header: "foo",
-      accessor: "foo",
-      minWidth: 100,
-    },
-    { Header: "bar", accessor: "bar", minWidth: 100 },
-  ];
-
-  const data = [
-    { foo: "foo1", bar: "bar1" },
-    { foo: "foo2", bar: "bar2" },
-  ];
+  const [selectedItem, Select] = useSelect({ items: ["foo", "bar"] });
+  const [selectedItem1, Select1] = useSelect({ items: ["foo1", "bar1"] });
   return (
     <>
-      <Button colorTheme="primary">foo</Button>
-      <Table
-        selectable
-        columns={columns}
-        data={data}
-        onSelect={(row) => {
-          console.log(row);
-        }}
-      />
-      <form
-        onSubmit={handleSubmit((data) => {
-          console.log(data);
-        })}
-      >
-        <Input type="text" {...register("input")} errors={formState.errors} />
-        <Checkbox label="foo" {...register("checkbox")} />
-        <Button type="submit">submit</Button>
-      </form>
+      <Select />
+      <Select1 />
     </>
   );
 };
