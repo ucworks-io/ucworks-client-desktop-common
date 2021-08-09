@@ -10,7 +10,6 @@ import React, {
   useState,
 } from "react";
 import SortableTree, {
-  TreeItem,
   ExtendedNodeData,
   walk,
   TreeNode,
@@ -20,9 +19,16 @@ import FileExplorerTheme from "react-sortable-tree-theme-file-explorer";
 import ArrowUpSvg from "../icons/icon-address-arrow-up.svg";
 import ArrowDownSvg from "../icons/icon-address-arrow-down.svg";
 
+type TreeItem = {
+  title: React.ReactNode | undefined;
+  expanded?: boolean | undefined;
+  children?: TreeItem[] | undefined;
+  [x: string]: any;
+};
+
 type Props = {
   items: TreeItem[];
-  initialNode?: TreeItem;
+  initialItem?: TreeItem;
 };
 
 type SelectProps = {
@@ -31,12 +37,12 @@ type SelectProps = {
 
 export default function useSelect({
   items,
-  initialNode = items[0],
+  initialItem = items[0],
 }: Props): [TreeItem, (props: SelectProps) => JSX.Element] {
   const theme = useTheme();
   const [isOpen, setIsOpen] = useState(false);
   const [treeData, setTreeData] = useState(items);
-  const [selectedNode, setSelectedNode] = useState(initialNode);
+  const [selectedNode, setSelectedNode] = useState(initialItem);
   const handleChange = (treeData: TreeItem[]) => {
     setTreeData(treeData);
   };
@@ -48,8 +54,12 @@ export default function useSelect({
       getNodeKey: (data: TreeNode & TreeIndex) => {
         return data.treeIndex;
       },
-      callback: (data: TreeNode) => {
-        Object.assign(data.node, { expanded: true });
+      callback: (data: ExtendedNodeData) => {
+        if (data.node.children) {
+          Object.assign(data.node, { expanded: true });
+        } else {
+          Object.assign(data.node, { expanded: false });
+        }
       },
     });
   }, []);
@@ -70,12 +80,12 @@ export default function useSelect({
     };
   }, [selectRef]);
 
-  const generateNodeProps = (data: ExtendedNodeData) => {
-    const { node } = data;
+  const generateNodeProps = (extendedNodeData: ExtendedNodeData) => {
+    const { node } = extendedNodeData;
     return {
       onClick: (e: any) => {
         if (e.target.localName !== "button") {
-          setSelectedNode(node);
+          setSelectedNode(node as TreeItem);
           setIsOpen(false);
         }
       },

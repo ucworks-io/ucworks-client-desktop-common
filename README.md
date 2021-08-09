@@ -196,9 +196,30 @@ const App = () => {
 
 | Property   | Type     | Required? | Default | Description                          |
 | ---------- | -------- | --------- | ------- | ------------------------------------ |
-| rows       | string[] | ✅         |         | tab title that is displayed          |
-| initialRow | number   | ❌         | 0       | tab index that is displayed at first |
+| items       | TreeItem[] | ✅         |         | treeItem of `select`          |
+| initialItem | TreeItem   | ❌         | 0       | treeItem which is displayed at first |
 
+#### Usages 
+
+```typescript
+import { useSelect } from "ucworks-client-desktop-common";
+
+const itemsMock = [
+  { title: "test1" },
+  { title: "test2", children: [{ title: "test2-1" }] },
+];
+
+const App = () => {
+  const [selectedItem, Select] = useSelect({
+    items: itemsMock,
+    initialItem: itemsMock[1].children[0],
+  });
+
+  return (
+    <Select />
+  );
+};
+```
 
 ### `useTab()`
 
