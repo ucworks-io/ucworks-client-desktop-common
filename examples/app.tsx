@@ -16,6 +16,7 @@ import {
   Radio,
 } from "../src";
 import "../index.css";
+import { useEffect } from "react";
 
 const itemsMock = [
   { title: "test1", children: [{ title: "test1-1" }] },
@@ -29,9 +30,14 @@ const itemsMock = [
 ];
 
 const App = () => {
-  const [selectedItem, Select] = useSelect({ items: itemsMock });
+  const [selectedNode, Select] = useSelect({
+    items: itemsMock,
+    initialNode: itemsMock[7].children[0],
+  });
   const { register, handleSubmit } = useForm();
-
+  useEffect(() => {
+    console.log(selectedNode);
+  }, [selectedNode]);
   const submit = (data: any) => {
     console.log(`data: `, data);
   };

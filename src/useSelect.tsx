@@ -22,7 +22,7 @@ import ArrowDownSvg from "../icons/icon-address-arrow-down.svg";
 
 type Props = {
   items: TreeItem[];
-  initialIndex?: number;
+  initialNode?: TreeItem;
 };
 
 type SelectProps = {
@@ -31,12 +31,12 @@ type SelectProps = {
 
 export default function useSelect({
   items,
-  initialIndex = 0,
+  initialNode = items[0],
 }: Props): [TreeItem, (props: SelectProps) => JSX.Element] {
   const theme = useTheme();
   const [isOpen, setIsOpen] = useState(false);
   const [treeData, setTreeData] = useState(items);
-  const [selectedItem, setSelectedItem] = useState(items[0]);
+  const [selectedNode, setSelectedNode] = useState(initialNode);
   const handleChange = (treeData: TreeItem[]) => {
     setTreeData(treeData);
   };
@@ -75,7 +75,7 @@ export default function useSelect({
     return {
       onClick: (e: any) => {
         if (e.target.localName !== "button") {
-          setSelectedItem(node);
+          setSelectedNode(node);
           setIsOpen(false);
         }
       },
@@ -119,7 +119,7 @@ export default function useSelect({
             text-align: left;
           `}
         >
-          <span>{selectedItem.title}</span>
+          <span>{selectedNode.title}</span>
           <img
             src={ArrowUpSvg}
             css={css`
@@ -208,5 +208,5 @@ export default function useSelect({
     );
   };
 
-  return [selectedItem, Select];
+  return [selectedNode, Select];
 }

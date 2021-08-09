@@ -85,6 +85,32 @@ const App = () => {
 }
 ```
 
+### `<Radio/>`
+
+#### PropTypes
+
+| Property | Type                             | Required? | Default | Description              |
+| -------- | -------------------------------- | --------- | ------- | ------------------------ |
+|          | Partial`<UseFormRegisterReturn`> | ❌         |         | return value of register |
+| label    | string                           | ✅         |         | description for checkbox |
+| value    | any                           | ✅         |         | value of radio group |
+| override | Interpolation                    | ❌         |         | override default css     |
+
+#### usages
+```typescript
+import { Radio, Button } from "ucworks-client-desktop-common";
+
+const App = () => {
+  const {handleSubmit, register} = useForm();
+  return (
+    <form onSubmit={handleSubmit((data) => {console.log(data)})}>
+      <Radio label="딸기" {...register('food')} value="strawberry" />
+      <Radio label="바나나" {...register('food')} value="banana" />
+      <Button type="submit">submit</Button>
+    </form>);
+}
+```
+
 ### `<Input/>`
 
 #### PropTypes
@@ -163,6 +189,16 @@ const App = () => {
 ```
 
 ## `hooks`
+
+### `useSelect()`
+
+#### PropsTypes
+
+| Property   | Type     | Required? | Default | Description                          |
+| ---------- | -------- | --------- | ------- | ------------------------------------ |
+| rows       | string[] | ✅         |         | tab title that is displayed          |
+| initialRow | number   | ❌         | 0       | tab index that is displayed at first |
+
 
 ### `useTab()`
 
