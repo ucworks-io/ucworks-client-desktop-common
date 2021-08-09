@@ -2,40 +2,85 @@
 import { css, Interpolation, Theme, useTheme } from "@emotion/react";
 import { UseFormRegisterReturn, UseFormReturn } from "react-hook-form";
 import { theme } from "./uc-theme-provider";
-import { useSelect as useSelectHook } from "downshift";
-import { useState } from "react";
+import React, {
+  MouseEventHandler,
+  SyntheticEvent,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import SortableTree, {
+  TreeItem,
+  ExtendedNodeData,
+  walk,
+  TreeNode,
+  TreeIndex,
+} from "@nosferatu500/react-sortable-tree";
+import FileExplorerTheme from "react-sortable-tree-theme-file-explorer";
 import ArrowUpSvg from "../icons/icon-address-arrow-up.svg";
+import ArrowDownSvg from "../icons/icon-address-arrow-down.svg";
 
 type Props = {
-  items: string[];
+  items: TreeItem[];
   initialIndex?: number;
 };
 
 type SelectProps = {
   override?: Interpolation<Theme>;
-} & React.DetailedHTMLProps<
-  React.SelectHTMLAttributes<HTMLSelectElement>,
-  HTMLSelectElement
-> &
-  Partial<UseFormRegisterReturn>;
+};
 
 export default function useSelect({
   items,
   initialIndex = 0,
-}: Props): [string, (props: SelectProps) => JSX.Element] {
+}: Props): [TreeItem, (props: SelectProps) => JSX.Element] {
   const theme = useTheme();
-  const {
-    isOpen,
-    selectedItem,
-    getToggleButtonProps,
-    getMenuProps,
-    highlightedIndex,
-    getItemProps,
-  } = useSelectHook({
-    items,
-    initialHighlightedIndex: initialIndex,
-    initialSelectedItem: items[initialIndex],
-  });
+  const [isOpen, setIsOpen] = useState(false);
+  const [treeData, setTreeData] = useState(items);
+  const [selectedItem, setSelectedItem] = useState(items[0]);
+  const handleChange = (treeData: TreeItem[]) => {
+    setTreeData(treeData);
+  };
+  const selectRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    walk({
+      treeData: treeData,
+      getNodeKey: (data: TreeNode & TreeIndex) => {
+        return data.treeIndex;
+      },
+      callback: (data: TreeNode) => {
+        Object.assign(data.node, { expanded: true });
+      },
+    });
+  }, []);
+
+  useEffect(() => {
+    const mouseDownListener = (e: any) => {
+      if (!selectRef.current) {
+        return;
+      }
+      if (!selectRef.current.contains(e.target)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", mouseDownListener);
+
+    return () => {
+      document.removeEventListener("mousedown", mouseDownListener);
+    };
+  }, [selectRef]);
+
+  const generateNodeProps = (data: ExtendedNodeData) => {
+    const { node } = data;
+    return {
+      onClick: (e: any) => {
+        if (e.target.localName !== "button") {
+          setSelectedItem(node);
+          setIsOpen(false);
+        }
+      },
+    };
+  };
 
   const Select = ({ override }: SelectProps) => {
     return (
@@ -51,8 +96,13 @@ export default function useSelect({
       >
         <button
           type="button"
-          {...getToggleButtonProps()}
+          onClick={() => {
+            setIsOpen(!isOpen);
+          }}
           css={css`
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             position: relative;
             width: 100%;
             height: 100%;
@@ -69,7 +119,7 @@ export default function useSelect({
             text-align: left;
           `}
         >
-          <span>{selectedItem as string}</span>
+          <span>{selectedItem.title}</span>
           <img
             src={ArrowUpSvg}
             css={css`
@@ -78,45 +128,85 @@ export default function useSelect({
             `}
           />
         </button>
-        <ul
-          {...getMenuProps()}
-          css={css`
-            position: absolute;
-            z-index: 10;
-            width: 100%;
-            box-shadow: 0 3px 12px 0 rgba(75, 85, 98, 0.3);
-            border: solid 1px #c8cace;
-            border-radius: 4px;
-            background-color: white;
-            display: ${isOpen ? "block" : "none"};
-            margin-top: 3px;
-            padding: 4px 4px;
-          `}
-        >
-          {isOpen &&
-            items.map((item, index) => (
-              <li
-                style={
-                  highlightedIndex === index
-                    ? { backgroundColor: theme.palettes.grey._100 }
-                    : {}
+
+        {isOpen && (
+          <div
+            ref={selectRef}
+            css={css`
+              position: absolute;
+              z-index: 10;
+              width: 100%;
+              /* height: 300px; */
+              box-shadow: 0 3px 12px 0 rgba(75, 85, 98, 0.3);
+              border: solid 1px #c8cace;
+              border-radius: 4px;
+              background-color: white;
+              display: ${isOpen ? "block" : "none"};
+              margin-top: 3px;
+              padding: 4px 4px;
+            `}
+          >
+            <SortableTree
+              treeData={treeData}
+              onChange={handleChange}
+              generateNodeProps={generateNodeProps}
+              theme={FileExplorerTheme}
+              isVirtualized={false}
+              canDrag={false}
+              css={css`
+                .rstcustom__node {
+                  &:hover {
+                    background-color: ${theme.palettes.grey._100};
+                  }
                 }
-                key={`${item}${index}`}
-                {...getItemProps({ item, index })}
-                css={css`
+                .rstcustom__expandButton {
+                  width: 25px;
+                  height: 25px;
+                  left: 12px !important;
+                  background: no-repeat center url(${ArrowDownSvg});
+                  &:after {
+                    border: none;
+                  }
+                }
+                .rstcustom__collapseButton {
+                  width: 25px;
+                  height: 25px;
+                  left: 12px !important;
+                  background: no-repeat center url(${ArrowUpSvg});
+
+                  &:after {
+                    border: none;
+                  }
+                }
+                .rstcustom__rowWrapper {
+                  cursor: pointer !important;
+                  & > div {
+                    height: 100%;
+                  }
+                }
+                .rstcustom__row {
+                  width: 100%;
+                  height: 100%;
+                }
+                .rstcustom__rowContents {
+                  justify-content: flex-start;
+                }
+                .rstcustom__rowLabel {
+                  width: 100%;
+                  height: 100%;
+                  display: flex;
+                  align-items: center;
                   font-size: 1.1rem;
                   color: ${theme.palettes.grey._1100};
-                  padding: 6px;
-                  cursor: pointer;
-                `}
-              >
-                {item}
-              </li>
-            ))}
-        </ul>
+                  padding: 0;
+                }
+              `}
+            />
+          </div>
+        )}
       </div>
     );
   };
 
-  return [selectedItem!, Select];
+  return [selectedItem, Select];
 }

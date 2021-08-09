@@ -13,16 +13,36 @@ import {
   UcThemeProvider,
   Table,
   useSelect,
+  Radio,
 } from "../src";
 import "../index.css";
 
+const itemsMock = [
+  { title: "test1", children: [{ title: "test1-1" }] },
+  { title: "test2", children: [{ title: "test2-1" }] },
+  { title: "test3", children: [{ title: "test3-1" }] },
+  { title: "test4", children: [{ title: "test4-1" }] },
+  { title: "test5", children: [{ title: "test5-1" }] },
+  { title: "test6", children: [{ title: "test6-1" }] },
+  { title: "test7", children: [{ title: "test7-1" }] },
+  { title: "test8", children: [{ title: "test8-1" }] },
+];
+
 const App = () => {
-  const [selectedItem, Select] = useSelect({ items: ["foo", "bar"] });
-  const [selectedItem1, Select1] = useSelect({ items: ["foo1", "bar1"] });
+  const [selectedItem, Select] = useSelect({ items: itemsMock });
+  const { register, handleSubmit } = useForm();
+
+  const submit = (data: any) => {
+    console.log(`data: `, data);
+  };
   return (
     <>
       <Select />
-      <Select1 />
+      <form onSubmit={handleSubmit(submit)}>
+        <Radio label="딸기" {...register("food")} value="strawberry" />
+        <Radio label="바나나" {...register("food")} value="banana" />
+        <input type="submit" />
+      </form>
     </>
   );
 };

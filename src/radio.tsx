@@ -7,6 +7,7 @@ import { theme } from "./uc-theme-provider";
 
 type Props = {
   label: string;
+  value: any;
   override?: Interpolation<Theme>;
 } & Omit<
   React.DetailedHTMLProps<
@@ -29,7 +30,7 @@ export default function Checkbox({ label, override, ...rest }: Props) {
       ]}
     >
       <input
-        type="checkbox"
+        type="radio"
         {...rest}
         css={css`
           width: 14px;
