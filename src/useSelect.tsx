@@ -1,14 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css, Interpolation, Theme, useTheme } from "@emotion/react";
-import { UseFormRegisterReturn, UseFormReturn } from "react-hook-form";
-import { theme } from "./uc-theme-provider";
-import React, {
-  MouseEventHandler,
-  SyntheticEvent,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { useEffect, useRef, useState } from "react";
 import SortableTree, {
   ExtendedNodeData,
   walk,
