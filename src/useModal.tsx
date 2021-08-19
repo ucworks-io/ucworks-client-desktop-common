@@ -5,14 +5,21 @@ import usePortal from "react-useportal";
 
 interface Props {
   overlay?: boolean;
+  closeOnOutsideClick?: boolean;
 }
 
-export default function useModal(props: Props = { overlay: true }) {
+export default function useModal(
+  { overlay, closeOnOutsideClick }: Props = {
+    overlay: true,
+    closeOnOutsideClick: true,
+  }
+) {
   const { isOpen, openPortal, togglePortal, closePortal, Portal } = usePortal({
+    closeOnOutsideClick,
     onOpen({ portal }) {
       const overlayDiv = document.createElement("div");
       overlayDiv.id = "overlay";
-      if (props?.overlay) {
+      if (overlay) {
         overlayDiv.style.cssText =
           "position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:100;background-color:#000000;opacity:0.9;";
       } else {

@@ -260,6 +260,7 @@ return [Portal](https://github.com/alex-cory/react-useportal), toggle functions 
 | Property | Type    | Required? | Default | Description                     |
 | -------- | ------- | --------- | ------- | ------------------------------- |
 | overlay  | boolean | ❌         | true    | Determine if overlay is visible |
+| closeOnOutsideClick  | boolean | ❌         | true    | Determine if the modal is closed when a user clicked outside of modal |
 
 #### Usages
 
