@@ -1,6 +1,6 @@
 {
   "name": "ucworks-client-desktop-common",
-  "version": "1.0.39",
+  "version": "1.0.40",
   "description": "?",
   "main": "./lib/index.js",
   "files": [
@@ -26,6 +26,7 @@
     "@types/react-dom": "^17.0.9",
     "@types/react-sortable-tree": "^0.3.14",
     "@types/react-table": "^7.7.2",
+    "@types/uuid": "^8.3.1",
     "babel-loader": "^8.2.2",
     "copy-webpack-plugin": "^9.0.1",
     "css-loader": "^6.2.0",
@@ -60,5 +61,7 @@
       "^.+\\.svg$": "jest-svg-transformer"
     }
   },
-  "dependencies": {}
+  "dependencies": {
+    "uuid": "^8.3.2"
+  }
 }
