@@ -18,33 +18,14 @@ import {
 import "../index.css";
 
 const App = () => {
-  const {
-    Modal: Modal1,
-    openModal: openModal1,
-    closeModal: closeModal1,
-    isOpen: is1Open,
-  } = useModal({ closeOnOutsideClick: false });
-
-  const {
-    Modal: Modal2,
-    openModal: openModal2,
-    closeModal: closeModal2,
-    isOpen: is2Open,
-  } = useModal();
   return (
     <>
-      <button onClick={openModal1}>open modal 1</button>
-      {is1Open && (
-        <Modal1>
-          <div>this is modal 1</div>
-          <button onClick={openModal2}>open modal 2</button>
-        </Modal1>
-      )}
-      {is2Open && (
-        <Modal2>
-          <div>this is modal 2</div>
-        </Modal2>
-      )}
+      <Checkbox
+        label="foo"
+        onChange={async (e) => {
+          console.log(e.target.checked);
+        }}
+      />
     </>
   );
 };

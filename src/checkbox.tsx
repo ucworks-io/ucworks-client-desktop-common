@@ -23,18 +23,20 @@ export default function Checkbox({ label, override, ...rest }: Props) {
       css={[
         css`
           display: flex;
-          align-items: baseline;
+          align-items: center;
+          user-select: none;
         `,
         override,
       ]}
     >
       <input
         type="checkbox"
+        id="checkbox"
         {...rest}
         css={css`
           width: 14px;
           height: 14px;
-          margin: 0;
+          cursor: pointer;
           appearance: none;
           outline: none;
           background-size: 100%;
@@ -45,10 +47,12 @@ export default function Checkbox({ label, override, ...rest }: Props) {
         `}
       />
       <label
+        htmlFor="checkbox"
         css={css`
           font-size: 1.14rem;
-          margin-left: 8px;
+          padding-left: 8px;
           color: ${theme.palettes.grey._1100};
+          cursor: pointer;
         `}
       >
         {label}
