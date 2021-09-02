@@ -1,6 +1,6 @@
 {
   "name": "ucworks-client-desktop-common",
-  "version": "1.0.42",
+  "version": "1.0.43",
   "description": "?",
   "main": "./lib/index.js",
   "files": [
@@ -17,7 +17,6 @@
   "devDependencies": {
     "@emotion/react": "^11.4.0",
     "@hookform/resolvers": "^2.7.0",
-    "@nosferatu500/react-sortable-tree": "^3.0.5",
     "@svgr/webpack": "^5.5.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
@@ -34,11 +33,10 @@
     "jest": "^27.0.5",
     "jest-svg-transformer": "^1.0.0",
     "prop-types": "^15.7.2",
-    "rc-tree": "^4.1.5",
+    "rc-tree": "^5.0.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.12.2",
-    "react-sortable-tree-theme-file-explorer": "^2.0.0",
     "react-table": "^7.7.0",
     "react-useportal": "^1.0.14",
     "style-loader": "^3.2.1",
