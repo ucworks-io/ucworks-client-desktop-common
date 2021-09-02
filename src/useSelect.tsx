@@ -1,26 +1,22 @@
 /** @jsxImportSource @emotion/react */
 import { css, Interpolation, Theme, useTheme } from "@emotion/react";
 import React, { useEffect, useRef, useState } from "react";
-import SortableTree, {
-  ExtendedNodeData,
-  walk,
-  TreeNode,
-  TreeIndex,
-} from "@nosferatu500/react-sortable-tree";
-import FileExplorerTheme from "react-sortable-tree-theme-file-explorer";
+import ReactDOM from "react-dom";
+import Tree from "rc-tree";
 import ArrowUpSvg from "../icons/icon-address-arrow-up.svg";
 import ArrowDownSvg from "../icons/icon-address-arrow-down.svg";
+import { EventDataNode } from "rc-tree/lib/interface";
+import treeCss from "./tree.css";
 
-type TreeItem = {
-  title: React.ReactNode | undefined;
-  expanded?: boolean | undefined;
-  children?: TreeItem[] | undefined;
-  [x: string]: any;
+export type UseSelectItem = {
+  key: string | number;
+  title: string | (() => JSX.Element);
+  children?: UseSelectItem[];
 };
 
 type Props = {
-  items: TreeItem[];
-  initialItem?: TreeItem;
+  items: UseSelectItem[];
+  initialKey?: string | number;
 };
 
 type SelectProps = {
@@ -29,32 +25,17 @@ type SelectProps = {
 
 export default function useSelect({
   items,
-  initialItem = items[0],
-}: Props): [TreeItem, (props: SelectProps) => JSX.Element] {
+  initialKey = items[0].key,
+}: Props): [
+  UseSelectItem,
+  React.Dispatch<React.SetStateAction<string[]>>,
+  (props: SelectProps) => JSX.Element
+] {
   const theme = useTheme();
   const [isOpen, setIsOpen] = useState(false);
-  const [treeData, setTreeData] = useState(items);
-  const [selectedNode, setSelectedNode] = useState(initialItem);
-  const handleChange = (treeData: TreeItem[]) => {
-    setTreeData(treeData);
-  };
+  const [selectedNode, setSelectedNode] = useState<UseSelectItem>(items[0]);
+  const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
   const selectRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    walk({
-      treeData: treeData,
-      getNodeKey: (data: TreeNode & TreeIndex) => {
-        return data.treeIndex;
-      },
-      callback: (data: ExtendedNodeData) => {
-        if (data.node.children) {
-          Object.assign(data.node, { expanded: true });
-        } else {
-          Object.assign(data.node, { expanded: false });
-        }
-      },
-    });
-  }, []);
 
   useEffect(() => {
     const mouseDownListener = (e: any) => {
@@ -72,16 +53,16 @@ export default function useSelect({
     };
   }, [selectRef]);
 
-  const generateNodeProps = (extendedNodeData: ExtendedNodeData) => {
-    const { node } = extendedNodeData;
-    return {
-      onClick: (e: any) => {
-        if (e.target.localName !== "button") {
-          setSelectedNode(node as TreeItem);
-          setIsOpen(false);
-        }
-      },
-    };
+  const handleSelect = (
+    selectedKeys: (string | number)[],
+    { node }: { node: EventDataNode }
+  ) => {
+    setSelectedNode({
+      key: node.key,
+      title: node.title as string | (() => JSX.Element),
+    });
+    setSelectedKeys(selectedKeys as string[]);
+    setIsOpen(false);
   };
 
   const Select = ({ override }: SelectProps) => {
@@ -121,7 +102,13 @@ export default function useSelect({
             text-align: left;
           `}
         >
-          <span>{selectedNode.title}</span>
+          <span>
+            {typeof selectedNode.title === "string" ? (
+              selectedNode.title
+            ) : (
+              <selectedNode.title />
+            )}
+          </span>
           <img
             src={ArrowUpSvg}
             css={css`
@@ -134,11 +121,13 @@ export default function useSelect({
         {isOpen && (
           <div
             ref={selectRef}
-            css={css`
+            css={[
+              treeCss,
+              `
               position: absolute;
               z-index: 10;
               width: 100%;
-              /* height: 300px; */
+              
               box-shadow: 0 3px 12px 0 rgba(75, 85, 98, 0.3);
               border: solid 1px #c8cace;
               border-radius: 4px;
@@ -146,63 +135,14 @@ export default function useSelect({
               display: ${isOpen ? "block" : "none"};
               margin-top: 3px;
               padding: 4px 4px;
-            `}
+            `,
+            ]}
           >
-            <SortableTree
-              treeData={treeData}
-              onChange={handleChange}
-              generateNodeProps={generateNodeProps}
-              theme={FileExplorerTheme}
-              isVirtualized={false}
-              canDrag={false}
-              css={css`
-                .rstcustom__node {
-                  &:hover {
-                    background-color: ${theme.palettes.grey._100};
-                  }
-                }
-                .rstcustom__expandButton {
-                  width: 25px;
-                  height: 25px;
-                  left: 12px !important;
-                  background: no-repeat center url(${ArrowDownSvg});
-                  &:after {
-                    border: none;
-                  }
-                }
-                .rstcustom__collapseButton {
-                  width: 25px;
-                  height: 25px;
-                  left: 12px !important;
-                  background: no-repeat center url(${ArrowUpSvg});
-
-                  &:after {
-                    border: none;
-                  }
-                }
-                .rstcustom__rowWrapper {
-                  cursor: pointer !important;
-                  & > div {
-                    height: 100%;
-                  }
-                }
-                .rstcustom__row {
-                  width: 100%;
-                  height: 100%;
-                }
-                .rstcustom__rowContents {
-                  justify-content: flex-start;
-                }
-                .rstcustom__rowLabel {
-                  width: 100%;
-                  height: 100%;
-                  display: flex;
-                  align-items: center;
-                  font-size: 1.1rem;
-                  color: ${theme.palettes.grey._1100};
-                  padding: 0;
-                }
-              `}
+            <Tree
+              treeData={items}
+              onSelect={handleSelect}
+              defaultExpandAll
+              selectedKeys={selectedKeys}
             />
           </div>
         )}
@@ -210,5 +150,5 @@ export default function useSelect({
     );
   };
 
-  return [selectedNode, Select];
+  return [selectedNode, setSelectedKeys, Select];
 }

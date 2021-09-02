@@ -1,9 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import { css, Interpolation, Theme } from "@emotion/react";
+import { useMemo, forwardRef } from "react";
 import { UseFormRegisterReturn, UseFormReturn } from "react-hook-form";
 import CheckedSVG from "../icons/icon-checkbox-checked.svg";
 import UnCheckedSVG from "../icons/icon-checkbox-unchecked.svg";
 import { theme } from "./uc-theme-provider";
+import { v4 } from "uuid";
 
 type Props = {
   label: string;
@@ -17,7 +19,11 @@ type Props = {
 > &
   Partial<UseFormRegisterReturn>;
 
-export default function Checkbox({ label, override, ...rest }: Props) {
+export default forwardRef<HTMLInputElement, Props>(function Checkbox(
+  { label, override, ...rest }: Props,
+  ref
+) {
+  const id = useMemo(() => v4(), []);
   return (
     <div
       css={[
@@ -31,8 +37,9 @@ export default function Checkbox({ label, override, ...rest }: Props) {
     >
       <input
         type="checkbox"
-        id="checkbox"
+        id={id}
         {...rest}
+        ref={ref}
         css={css`
           width: 14px;
           height: 14px;
@@ -47,7 +54,7 @@ export default function Checkbox({ label, override, ...rest }: Props) {
         `}
       />
       <label
-        htmlFor="checkbox"
+        htmlFor={id}
         css={css`
           font-size: 1.14rem;
           padding-left: 8px;
@@ -59,4 +66,4 @@ export default function Checkbox({ label, override, ...rest }: Props) {
       </label>
     </div>
   );
-}
+});

@@ -1,4 +1,5 @@
 /** @jsxImportSource @emotion/react */
+import { forwardRef } from "react";
 import { css, Interpolation, Theme } from "@emotion/react";
 import { UseFormRegisterReturn, UseFormReturn } from "react-hook-form";
 import { theme } from "./uc-theme-provider";
@@ -13,12 +14,16 @@ type Props = {
 > &
   Partial<UseFormRegisterReturn>;
 
-export default function Input({ type, override, errors, ...rest }: Props) {
+export default forwardRef<HTMLInputElement, Props>(function Input(
+  { type, override, errors, ...rest }: Props,
+  ref
+) {
   return (
     <>
       <input
         type={type}
         {...rest}
+        ref={ref}
         css={[
           css`
             display: inline-block;
@@ -68,4 +73,4 @@ export default function Input({ type, override, errors, ...rest }: Props) {
       )}
     </>
   );
-}
+});

@@ -4,6 +4,7 @@ import { UseFormRegisterReturn, UseFormReturn } from "react-hook-form";
 import CheckedSVG from "../icons/icon-checkbox-checked.svg";
 import UnCheckedSVG from "../icons/icon-checkbox-unchecked.svg";
 import { theme } from "./uc-theme-provider";
+import { forwardRef } from "react";
 
 type Props = {
   label: string;
@@ -18,7 +19,10 @@ type Props = {
 > &
   Partial<UseFormRegisterReturn>;
 
-export default function Checkbox({ label, override, ...rest }: Props) {
+export default forwardRef<HTMLInputElement, Props>(function Radio(
+  { label, override, ...rest }: Props,
+  ref
+) {
   return (
     <div
       css={[
@@ -32,6 +36,7 @@ export default function Checkbox({ label, override, ...rest }: Props) {
       <input
         type="radio"
         {...rest}
+        ref={ref}
         css={css`
           width: 14px;
           height: 14px;
@@ -56,4 +61,4 @@ export default function Checkbox({ label, override, ...rest }: Props) {
       </label>
     </div>
   );
-}
+});

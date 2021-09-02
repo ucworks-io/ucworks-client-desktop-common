@@ -17,15 +17,43 @@ import {
 } from "../src";
 import "../index.css";
 
+function DepartmentNode({ department }: { department: any }) {
+  return (
+    <div
+      css={css`
+        width: 100%;
+        height: 100%;
+        & > div {
+          display: flex;
+          align-items: center;
+          width: 100%;
+          height: 100%;
+        }
+      `}
+    >
+      <div>{department.dept_name}</div>
+    </div>
+  );
+}
+
 const App = () => {
+  const [selectedNode, set, Select] = useSelect({
+    items: [
+      {
+        title: () => <DepartmentNode department={{ dept_name: "haha" }} />,
+        key: "0",
+        children: [
+          {
+            title: () => <DepartmentNode department={{ dept_name: "haha" }} />,
+            key: "0-1",
+          },
+        ],
+      },
+    ],
+  });
   return (
     <>
-      <Checkbox
-        label="foo"
-        onChange={async (e) => {
-          console.log(e.target.checked);
-        }}
-      />
+      <Select />
     </>
   );
 };

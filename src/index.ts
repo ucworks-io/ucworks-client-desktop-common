@@ -10,4 +10,4 @@ export {
 } from "./uc-theme-provider";
 export { default as useModal } from "./useModal";
 export { default as useTab } from "./useTab";
-export { default as useSelect } from "./useSelect";
+export { default as useSelect, UseSelectItem } from "./useSelect";
