@@ -196,30 +196,10 @@ const App = () => {
 
 | Property   | Type     | Required? | Default | Description                          |
 | ---------- | -------- | --------- | ------- | ------------------------------------ |
-| items       | TreeItem[] | ✅         |         | treeItem of `select`          |
-| initialItem | TreeItem   | ❌         | 0       | treeItem which is displayed at first |
+| items       | UseSelectItem[] | ✅         |         | treeItem of `select`          |
+| initialKey | string \| number   | ❌         | items[0].key       | treeItem which is displayed at first |
+| disabled | boolean   | ❌         | false       | determine whether select button is disabled or not
 
-#### Usages 
-
-```typescript
-import { useSelect } from "ucworks-client-desktop-common";
-
-const itemsMock = [
-  { title: "test1" },
-  { title: "test2", children: [{ title: "test2-1" }] },
-];
-
-const App = () => {
-  const [selectedItem, Select] = useSelect({
-    items: itemsMock,
-    initialItem: itemsMock[1].children[0],
-  });
-
-  return (
-    <Select />
-  );
-};
-```
 
 ### `useTab()`
 
