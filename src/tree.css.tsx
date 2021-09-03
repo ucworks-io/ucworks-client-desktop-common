@@ -16,9 +16,6 @@ const treeCss = css`
     }
 
     // padding: 5px;
-    .${treeNodePrefixCls}.user {
-      height: 56px;
-    }
     .${treeNodePrefixCls} {
       margin: 0;
       padding: 0;
@@ -27,7 +24,7 @@ const treeCss = css`
       outline: 0;
       display: flex;
       align-items: center;
-      height: 28px;
+      height: auto;
       .draggable {
         color: #333;
         -moz-user-select: none;

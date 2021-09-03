@@ -17,6 +17,7 @@ export type UseSelectItem = {
 type Props = {
   items: UseSelectItem[];
   initialKey?: string | number;
+  disabled?: boolean;
 };
 
 type SelectProps = {
@@ -26,15 +27,16 @@ type SelectProps = {
 export default function useSelect({
   items,
   initialKey = items[0].key,
+  disabled = false,
 }: Props): [
   UseSelectItem,
-  React.Dispatch<React.SetStateAction<string[]>>,
+  React.Dispatch<React.SetStateAction<string>>,
   (props: SelectProps) => JSX.Element
 ] {
   const theme = useTheme();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedNode, setSelectedNode] = useState<UseSelectItem>(items[0]);
-  const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
+  const [selectedKey, setSelectedKey] = useState<string>(initialKey as string);
   const selectRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -53,17 +55,36 @@ export default function useSelect({
     };
   }, [selectRef]);
 
-  const handleSelect = (
-    selectedKeys: (string | number)[],
-    { node }: { node: EventDataNode }
-  ) => {
-    setSelectedNode({
-      key: node.key,
-      title: node.title as string | (() => JSX.Element),
-    });
-    setSelectedKeys(selectedKeys as string[]);
+  const handleSelect = (_: any, { node }: { node: EventDataNode }) => {
+    setSelectedKey(node.key as string);
     setIsOpen(false);
   };
+
+  useEffect(() => {
+    if (selectedKey) {
+      const find = (treeData: UseSelectItem[], key: string) => {
+        let targetNode: UseSelectItem | undefined;
+
+        const findRecursively = (children: UseSelectItem[]) => {
+          children.forEach((child) => {
+            if (child.key === key) {
+              targetNode = child;
+            }
+
+            if ("children" in child && child.children) {
+              findRecursively(child.children);
+            }
+          });
+        };
+
+        findRecursively(treeData);
+
+        return targetNode;
+      };
+      const selectedNode = find(items, selectedKey);
+      setSelectedNode(selectedNode as UseSelectItem);
+    }
+  }, [selectedKey]);
 
   const Select = ({ override }: SelectProps) => {
     return (
@@ -82,6 +103,7 @@ export default function useSelect({
           onClick={() => {
             setIsOpen(!isOpen);
           }}
+          disabled={disabled}
           css={css`
             display: flex;
             align-items: center;
@@ -93,13 +115,16 @@ export default function useSelect({
             border: 1px solid
               ${isOpen ? theme.palettes.primary._500 : theme.palettes.grey._500};
             border-radius: 4px;
-            &:hover {
+            &:not(:disabled):hover {
               border: 1px solid ${theme.palettes.primary._500};
             }
             cursor: pointer;
             font-size: 1.1rem;
             color: ${theme.palettes.grey._1100};
             text-align: left;
+            &:disabled {
+              cursor: not-allowed;
+            }
           `}
         >
           <span>
@@ -142,7 +167,7 @@ export default function useSelect({
               treeData={items}
               onSelect={handleSelect}
               defaultExpandAll
-              selectedKeys={selectedKeys}
+              selectedKeys={[selectedKey]}
             />
           </div>
         )}
@@ -150,5 +175,5 @@ export default function useSelect({
     );
   };
 
-  return [selectedNode, setSelectedKeys, Select];
+  return [selectedNode, setSelectedKey, Select];
 }
