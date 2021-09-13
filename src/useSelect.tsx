@@ -30,21 +30,25 @@ export default function useSelect({
   disabled = false,
 }: Props): [
   UseSelectItem,
-  React.Dispatch<React.SetStateAction<string>>,
+  React.Dispatch<React.SetStateAction<string | number>>,
   (props: SelectProps) => JSX.Element
 ] {
   const theme = useTheme();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedNode, setSelectedNode] = useState<UseSelectItem>(items[0]);
-  const [selectedKey, setSelectedKey] = useState<string>(initialKey as string);
+  const [selectedKey, setSelectedKey] = useState<string | number>(initialKey);
   const selectRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const mouseDownListener = (e: any) => {
-      if (!selectRef.current) {
+      if (!selectRef.current || !buttonRef.current) {
         return;
       }
-      if (!selectRef.current.contains(e.target)) {
+      if (
+        !selectRef.current.contains(e.target) &&
+        !buttonRef.current.contains(e.target)
+      ) {
         setIsOpen(false);
       }
     };
@@ -53,7 +57,7 @@ export default function useSelect({
     return () => {
       document.removeEventListener("mousedown", mouseDownListener);
     };
-  }, [selectRef]);
+  }, [selectRef, buttonRef]);
 
   const handleSelect = (_: any, { node }: { node: EventDataNode }) => {
     setSelectedKey(node.key as string);
@@ -62,7 +66,7 @@ export default function useSelect({
 
   useEffect(() => {
     if (selectedKey) {
-      const find = (treeData: UseSelectItem[], key: string) => {
+      const find = (treeData: UseSelectItem[], key: string | number) => {
         let targetNode: UseSelectItem | undefined;
 
         const findRecursively = (children: UseSelectItem[]) => {
@@ -99,8 +103,9 @@ export default function useSelect({
         ]}
       >
         <button
+          ref={buttonRef}
           type="button"
-          onClick={() => {
+          onClick={(e) => {
             setIsOpen(!isOpen);
           }}
           disabled={disabled}

@@ -1,10 +1,16 @@
-import {ThemeProvider} from '@emotion/react';
-import React from 'react';
+import { ThemeProvider } from "@emotion/react";
+import React from "react";
 
 export type UcTheme = typeof theme;
 
 export const theme = {
-    palettes: {
+  palettes: {
+    black: {
+      _500: "#000000",
+    },
+    white: {
+      _500: "#ffffff",
+    },
     primary: {
       _400: "#604790",
       _500: "#331371",
@@ -86,13 +92,13 @@ export const theme = {
     deepGreen: {
       _500: "#006a66",
     },
-  }} as const;
-  
+  },
+} as const;
 
 interface Props {
-    children: JSX.Element | JSX.Element[];
+  children: JSX.Element | JSX.Element[];
 }
 
-export default function UcThemeProvider({children}: Props) {
-    return <ThemeProvider theme={theme}>{children}</ThemeProvider>
+export default function UcThemeProvider({ children }: Props) {
+  return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
 }
