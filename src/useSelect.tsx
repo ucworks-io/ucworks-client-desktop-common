@@ -12,6 +12,7 @@ export type UseSelectItem = {
   key: string | number;
   title: string | (() => JSX.Element);
   children?: UseSelectItem[];
+  isLeaf?: boolean;
 };
 
 type Props = {

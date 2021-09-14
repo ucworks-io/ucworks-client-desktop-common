@@ -17,6 +17,7 @@
   },
   "include": [
     "./src/**/*",
+    "./examples/**/*",
     "./@types",
     "./node_modules/@types"
   ]

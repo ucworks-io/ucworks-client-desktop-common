@@ -1,36 +1,35 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import { useSelect } from "../src";
-
-function DepartmentNode({ department }: { department: any }) {
-  return (
-    <div
-      css={css`
-        width: 100%;
-        height: 100%;
-        & > div {
-          display: flex;
-          align-items: center;
-          width: 100%;
-          height: 100%;
-        }
-      `}
-    >
-      <div>{department.dept_name}</div>
-    </div>
-  );
-}
+import { ReactComponent as SvgIconCheckboxChecked } from "../icons/icon-checkbox-checked.svg";
 
 export default function ExampleUseSelect() {
   const [selectedNode, set, Select] = useSelect({
     items: [
       {
-        title: () => <DepartmentNode department={{ dept_name: "0" }} />,
+        title: () => (
+          <div
+            css={css`
+              display: flex;
+              align-items: center;
+              padding: 10px 0;
+            `}
+          >
+            <SvgIconCheckboxChecked
+              css={css`
+                margin-right: 10px;
+                transform: scale(1.5);
+              `}
+            />
+            <span>최상위</span>
+          </div>
+        ),
         key: "0",
         children: [
           {
             title: "0-1",
             key: "0-1",
+            isLeaf: false,
           },
         ],
       },
