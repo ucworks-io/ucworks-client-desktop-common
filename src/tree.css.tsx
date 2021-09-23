@@ -18,13 +18,14 @@ const treeCss = css`
     // padding: 5px;
     .${treeNodePrefixCls} {
       margin: 0;
-      padding: 0;
+      padding: 5px 0;
       white-space: nowrap;
       list-style: none;
       outline: 0;
       display: flex;
       align-items: center;
       height: auto;
+      cursor: pointer;
       .draggable {
         color: #333;
         -moz-user-select: none;
@@ -36,7 +37,7 @@ const treeCss = css`
         -webkit-user-drag: element;
       }
       &:hover {
-        background-color: ${theme.palettes.grey._100};
+        background-color: ${theme.palettes.grey._200};
       }
       &-selected {
         background-color: ${theme.palettes.grey._100};
@@ -73,7 +74,7 @@ const treeCss = css`
       }
       .${treePrefixCls}-node-content-wrapper {
         position: relative;
-        width: auto;
+
         height: 100%;
         margin: 0;
         padding: 0;
@@ -179,7 +180,7 @@ const treeCss = css`
       padding: 0 5px;
       display: flex;
       align-items: center;
-      width: 100%;
+
       height: 100%;
       color: ${theme.palettes.grey._1100};
     }

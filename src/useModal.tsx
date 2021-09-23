@@ -6,12 +6,14 @@ import usePortal from "react-useportal";
 interface Props {
   overlay?: boolean;
   closeOnOutsideClick?: boolean;
+  bindTo?: HTMLElement | undefined;
 }
 
 export default function useModal(
-  { overlay, closeOnOutsideClick }: Props = {
+  { overlay, closeOnOutsideClick, bindTo }: Props = {
     overlay: true,
     closeOnOutsideClick: true,
+    bindTo: undefined,
   }
 ) {
   const { isOpen, openPortal, togglePortal, closePortal, Portal } = usePortal({
@@ -44,6 +46,7 @@ export default function useModal(
         overlayDiv.remove();
       }
     },
+    bindTo,
   });
 
   useEffect(

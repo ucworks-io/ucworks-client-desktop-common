@@ -133,7 +133,14 @@ export default function useSelect({
             }
           `}
         >
-          <span>
+          <span
+            css={css`
+              text-overflow: ellipsis;
+              width: 280px;
+              white-space: nowrap;
+              overflow: hidden;
+            `}
+          >
             {typeof selectedNode.title === "string" ? (
               selectedNode.title
             ) : (
@@ -154,27 +161,34 @@ export default function useSelect({
             ref={selectRef}
             css={[
               treeCss,
-              `
-              position: absolute;
-              z-index: 10;
-              width: 100%;
-              
-              box-shadow: 0 3px 12px 0 rgba(75, 85, 98, 0.3);
-              border: solid 1px #c8cace;
-              border-radius: 4px;
-              background-color: white;
-              display: ${isOpen ? "block" : "none"};
-              margin-top: 3px;
-              padding: 4px 4px;
-            `,
+              css`
+                position: absolute;
+                z-index: 10;
+                width: 100%;
+                max-height: 200px;
+                overflow: auto;
+                box-shadow: 0 3px 12px 0 rgba(75, 85, 98, 0.3);
+                border: solid 1px #c8cace;
+                border-radius: 4px;
+                background-color: white;
+                display: ${isOpen ? "block" : "none"};
+                margin-top: 3px;
+                padding: 4px 4px;
+              `,
             ]}
           >
-            <Tree
-              treeData={items}
-              onSelect={handleSelect}
-              defaultExpandAll
-              selectedKeys={[selectedKey]}
-            />
+            <div
+              css={css`
+                width: fit-content;
+              `}
+            >
+              <Tree
+                treeData={items}
+                onSelect={handleSelect}
+                defaultExpandAll
+                selectedKeys={[selectedKey]}
+              />
+            </div>
           </div>
         )}
       </div>
