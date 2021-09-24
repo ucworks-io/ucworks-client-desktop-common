@@ -180,6 +180,7 @@ export default function useSelect({
             <div
               css={css`
                 width: fit-content;
+                min-width: 100%;
               `}
             >
               <Tree
