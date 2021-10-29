@@ -28,7 +28,7 @@ export default forwardRef<HTMLInputElement, Props>(function Radio(
       css={[
         css`
           display: flex;
-          align-items: baseline;
+          align-items: center;
         `,
         override,
       ]}
@@ -37,16 +37,43 @@ export default forwardRef<HTMLInputElement, Props>(function Radio(
         type="radio"
         {...rest}
         ref={ref}
-        css={css`
-          width: 14px;
+        css={(theme) => css`
+          /* width: 14px;
           height: 14px;
-          margin: 0;
-          appearance: none;
-          outline: none;
-          background-size: 100%;
-          background-image: url(${UnCheckedSVG});
+          margin: 3px 3px 3px 4px; */
+          /* appearance: none; */
+          /* outline: none;
+          background-size: 100%; */
+          /* background-image: url(${UnCheckedSVG});
           &:checked {
             background-image: url(${CheckedSVG});
+          } */
+          background-color: #ffffff;
+          border: 1px solid #c8cace;
+          width: 14px;
+          height: 14px;
+          border-radius: 14px;
+          appearance: none;
+          outline: none;
+          margin: 3px 3px 3px 4px;
+          box-sizing: border-box;
+          position: relative;
+          &:checked {
+            border: 1px solid ${theme.palettes.primary._500};
+          }
+
+          &:checked:after {
+            width: 8px;
+            height: 8px;
+            border-radius: 8px;
+
+            top: 2px;
+            left: 2px;
+            position: absolute;
+            background-color: ${theme.palettes.primary._500};
+            content: "";
+            display: inline-block;
+            visibility: visible;
           }
         `}
       />

@@ -8,7 +8,7 @@ import { theme } from "./uc-theme-provider";
 import { v4 } from "uuid";
 
 type Props = {
-  label: string;
+  label?: string;
   override?: Interpolation<Theme>;
 } & Omit<
   React.DetailedHTMLProps<
@@ -53,17 +53,21 @@ export default forwardRef<HTMLInputElement, Props>(function Checkbox(
           }
         `}
       />
-      <label
-        htmlFor={id}
-        css={css`
-          font-size: 1.14rem;
-          padding-left: 8px;
-          color: ${theme.palettes.grey._1100};
-          cursor: pointer;
-        `}
-      >
-        {label}
-      </label>
+      {label ? (
+        <label
+          htmlFor={id}
+          css={css`
+            font-size: 1.14rem;
+            padding-left: 8px;
+            color: ${theme.palettes.grey._1100};
+            cursor: pointer;
+          `}
+        >
+          {label}
+        </label>
+      ) : (
+        <div />
+      )}
     </div>
   );
 });
