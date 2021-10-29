@@ -37,7 +37,7 @@ export default forwardRef<HTMLInputElement, Props>(function Radio(
         type="radio"
         {...rest}
         ref={ref}
-        css={(theme) => css`
+        css={css`
           /* width: 14px;
           height: 14px;
           margin: 3px 3px 3px 4px; */
