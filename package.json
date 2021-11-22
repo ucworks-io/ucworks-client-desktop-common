@@ -1,6 +1,6 @@
 {
   "name": "ucworks-client-desktop-common",
-  "version": "1.0.75",
+  "version": "1.0.76",
   "description": "?",
   "main": "./lib/index.js",
   "files": [
@@ -23,6 +23,7 @@
     "@types/jest": "^26.0.23",
     "@types/react": "^17.0.15",
     "@types/react-dom": "^17.0.9",
+    "@types/react-router-dom": "5.1.6",
     "@types/react-sortable-tree": "^0.3.14",
     "@types/react-table": "^7.7.2",
     "@types/uuid": "^8.3.1",
@@ -60,6 +61,7 @@
     }
   },
   "dependencies": {
+    "react-router-dom": "5.2.0",
     "uuid": "^8.3.2"
   }
 }
