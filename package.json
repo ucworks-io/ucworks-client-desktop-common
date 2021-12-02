@@ -1,6 +1,6 @@
 {
   "name": "ucworks-client-desktop-common",
-  "version": "1.0.80",
+  "version": "1.0.81",
   "description": "?",
   "main": "./lib/index.js",
   "files": [
@@ -61,6 +61,7 @@
     }
   },
   "dependencies": {
+    "lodash": "^4.17.21",
     "react-router-dom": "5.2.0",
     "uuid": "^8.3.2"
   }
