@@ -1,6 +1,6 @@
 {
   "name": "ucworks-client-desktop-common",
-  "version": "1.0.76",
+  "version": "1.0.78",
   "description": "?",
   "main": "./lib/index.js",
   "files": [
