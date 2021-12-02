@@ -1,12 +1,13 @@
 /** @jsxImportSource @emotion/react */
 import { css, Interpolation, Theme, useTheme } from "@emotion/react";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import Tree from "rc-tree";
 import ArrowUpSvg from "../icons/icon-address-arrow-up.svg";
 import ArrowDownSvg from "../icons/icon-address-arrow-down.svg";
 import { EventDataNode } from "rc-tree/lib/interface";
 import treeCss from "./tree.css";
+import _ from "lodash";
 
 export type UseSelectItem = {
   key: string | number;
@@ -22,7 +23,28 @@ type Props = {
 };
 
 type SelectProps = {
+  onChange?: (item: UseSelectItem) => void | Promise<void>;
   override?: Interpolation<Theme>;
+};
+
+const find = (treeData: UseSelectItem[], key: string | number) => {
+  let targetNode: UseSelectItem | undefined;
+
+  const findRecursively = (children: UseSelectItem[]) => {
+    children.forEach((child) => {
+      if (child.key === key) {
+        targetNode = child;
+      }
+
+      if ("children" in child && child.children) {
+        findRecursively(child.children);
+      }
+    });
+  };
+
+  findRecursively(treeData);
+
+  return targetNode;
 };
 
 export default function useSelect({
@@ -36,12 +58,20 @@ export default function useSelect({
 ] {
   const theme = useTheme();
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedNode, setSelectedNode] = useState<UseSelectItem>(
-    items.find((v) => v.key === initialKey) || items[0]
-  );
-  const [selectedKey, setSelectedKey] = useState<string | number>(initialKey);
+
+  const [selectedKey, setSelectedKey] = useState(initialKey);
   const selectRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
+
+  const selectedNode = useMemo(() => {
+    const node = find(items, selectedKey);
+
+    if (node) {
+      return node;
+    } else {
+      return items[0];
+    }
+  }, [items, selectedKey]);
 
   useEffect(() => {
     const mouseDownListener = (e: any) => {
@@ -62,38 +92,15 @@ export default function useSelect({
     };
   }, [selectRef, buttonRef]);
 
-  const handleSelect = (_: any, { node }: { node: EventDataNode }) => {
-    setSelectedKey(node.key as string);
-    setIsOpen(false);
-  };
+  const Select = ({ override, onChange }: SelectProps) => {
+    const handleSelect = (_: any, { node }: { node: EventDataNode }) => {
+      setSelectedKey(node.key);
+      setIsOpen(false);
+      if (typeof onChange === "function") {
+        onChange(node as UseSelectItem);
+      }
+    };
 
-  useEffect(() => {
-    if (selectedKey) {
-      const find = (treeData: UseSelectItem[], key: string | number) => {
-        let targetNode: UseSelectItem | undefined;
-
-        const findRecursively = (children: UseSelectItem[]) => {
-          children.forEach((child) => {
-            if (child.key === key) {
-              targetNode = child;
-            }
-
-            if ("children" in child && child.children) {
-              findRecursively(child.children);
-            }
-          });
-        };
-
-        findRecursively(treeData);
-
-        return targetNode;
-      };
-      const selectedNode = find(items, selectedKey);
-      setSelectedNode(selectedNode as UseSelectItem);
-    }
-  }, [selectedKey, items]);
-
-  const Select = ({ override }: SelectProps) => {
     return (
       <div
         css={[

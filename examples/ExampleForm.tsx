@@ -7,7 +7,7 @@ import { Checkbox, Form, Input, Radio, useSelect } from "../src";
 export default function ExampleUseSelect() {
   const methods = useForm();
   const [uselessBoolean, setUselessBoolean] = useState(false);
-  const submit = (data) => {
+  const submit = (data: any) => {
     console.log(data);
   };
 
