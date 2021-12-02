@@ -8,21 +8,20 @@ import { forwardRef } from "react";
 
 type Props = {
   label: string;
-  value: any;
+  register?: UseFormReturn["register"];
   override?: Interpolation<Theme>;
-} & Omit<
-  React.DetailedHTMLProps<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement
-  >,
-  "type"
-> &
-  Partial<UseFormRegisterReturn>;
+} & React.DetailedHTMLProps<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  HTMLInputElement
+>;
 
-export default forwardRef<HTMLInputElement, Props>(function Radio(
-  { label, override, ...rest }: Props,
-  ref
-) {
+const Radio: React.FC<Props> = ({
+  label,
+  register,
+  override,
+  name,
+  ...rest
+}) => {
   return (
     <div
       css={[
@@ -35,7 +34,7 @@ export default forwardRef<HTMLInputElement, Props>(function Radio(
       <label
         css={css`
           cursor: pointer;
-          font-size: 1.14rem;
+          font-size: 1rem;
           display: flex;
           align-items: center;
           color: ${theme.palettes.grey._1100};
@@ -43,8 +42,6 @@ export default forwardRef<HTMLInputElement, Props>(function Radio(
       >
         <input
           type="radio"
-          {...rest}
-          ref={ref}
           css={css`
             cursor: pointer;
             background-color: #ffffff;
@@ -75,9 +72,13 @@ export default forwardRef<HTMLInputElement, Props>(function Radio(
               visibility: visible;
             }
           `}
+          {...(register ? register(name || "") : {})}
+          {...rest}
         />
         {label}
       </label>
     </div>
   );
-});
+};
+
+export default Radio;

@@ -1,28 +1,28 @@
 /** @jsxImportSource @emotion/react */
 import { css, Interpolation, Theme } from "@emotion/react";
-import { useMemo, forwardRef } from "react";
-import { UseFormRegisterReturn, UseFormReturn } from "react-hook-form";
-import CheckedSVG from "../icons/icon-checkbox-checked.svg";
-import UnCheckedSVG from "../icons/icon-checkbox-unchecked.svg";
-import { theme } from "./uc-theme-provider";
+import { useMemo } from "react";
 import { v4 } from "uuid";
+import { UseFormReturn } from "react-hook-form";
+import CheckedSvg from "../icons/icon-checkbox-checked.svg";
+import UnCheckedSvg from "../icons/icon-checkbox-unchecked.svg";
+import { theme } from "./uc-theme-provider";
 
 type Props = {
   label?: string;
   override?: Interpolation<Theme>;
-} & Omit<
-  React.DetailedHTMLProps<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement
-  >,
-  "type"
-> &
-  Partial<UseFormRegisterReturn>;
+  register?: UseFormReturn["register"];
+} & React.DetailedHTMLProps<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  HTMLInputElement
+>;
 
-export default forwardRef<HTMLInputElement, Props>(function Checkbox(
-  { label, override, ...rest }: Props,
-  ref
-) {
+const Checkbox: React.FC<Props> = ({
+  label,
+  override,
+  register,
+  name,
+  ...rest
+}) => {
   const id = useMemo(() => v4(), []);
   return (
     <div
@@ -38,8 +38,6 @@ export default forwardRef<HTMLInputElement, Props>(function Checkbox(
       <input
         type="checkbox"
         id={id}
-        {...rest}
-        ref={ref}
         css={css`
           width: 14px;
           height: 14px;
@@ -47,19 +45,22 @@ export default forwardRef<HTMLInputElement, Props>(function Checkbox(
           appearance: none;
           outline: none;
           background-size: 100%;
-          background-image: url(${UnCheckedSVG});
+          background-image: url(${UnCheckedSvg});
+          background-repeat: no-repeat;
           &:checked {
-            background-image: url(${CheckedSVG});
+            background-image: url(${CheckedSvg});
           }
         `}
+        {...rest}
+        {...(register ? register(name || "") : {})}
       />
       {label ? (
         <label
           htmlFor={id}
           css={css`
-            font-size: 1.14rem;
-            padding-left: 8px;
             color: ${theme.palettes.grey._1100};
+            font-size: 1rem;
+            padding-left: 8px;
             cursor: pointer;
           `}
         >
@@ -70,4 +71,6 @@ export default forwardRef<HTMLInputElement, Props>(function Checkbox(
       )}
     </div>
   );
-});
+};
+
+export default Checkbox;

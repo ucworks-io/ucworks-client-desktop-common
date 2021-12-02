@@ -1,17 +1,9 @@
 /** @jsxImportSource @emotion/react */
-
-import ReactDOM from "react-dom";
-import { UcThemeProvider } from "../src";
-import "../index.css";
 import ExampleUseSelect from "./ExampleUseSelect";
 import ExampleUseModal from "./ExampleUseModal";
-import ExampleRadio from "./ExampleRadio";
+import ExampleForm from "./ExampleForm";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-ReactDOM.render(
-  <UcThemeProvider>
-    <ExampleUseSelect />
-    <ExampleUseModal />
-    <ExampleRadio />
-  </UcThemeProvider>,
-  document.getElementById("root")
-);
+export default function App() {
+  return <div>fuck</div>;
+}

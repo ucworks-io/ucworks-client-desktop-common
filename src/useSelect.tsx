@@ -36,7 +36,9 @@ export default function useSelect({
 ] {
   const theme = useTheme();
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedNode, setSelectedNode] = useState<UseSelectItem>(items[0]);
+  const [selectedNode, setSelectedNode] = useState<UseSelectItem>(
+    items.find((v) => v.key === initialKey) || items[0]
+  );
   const [selectedKey, setSelectedKey] = useState<string | number>(initialKey);
   const selectRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -89,7 +91,7 @@ export default function useSelect({
       const selectedNode = find(items, selectedKey);
       setSelectedNode(selectedNode as UseSelectItem);
     }
-  }, [selectedKey]);
+  }, [selectedKey, items]);
 
   const Select = ({ override }: SelectProps) => {
     return (
@@ -125,7 +127,7 @@ export default function useSelect({
               border: 1px solid ${theme.palettes.primary._500};
             }
             cursor: pointer;
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: ${theme.palettes.grey._1100};
             text-align: left;
             &:disabled {
